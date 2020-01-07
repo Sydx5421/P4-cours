@@ -1,39 +1,21 @@
 <?php
-require('./controller/frontend.php');
+use App\Library\Autoloader;
+use App\Library\RouterPOO;
+use App\Library\Route;
+use App\Model\UserManager;
 
-try{// on essaie de faire des choses..
-    if (isset($_GET['action'])) {
-        if ($_GET['action'] == 'listPosts') {
-            listPosts();
-        }
-        elseif ($_GET['action'] == 'post') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
-            }
-            else {
-                // Erreur !  On arrête tout, on envoie une exception, donc on saute directement au catch
-                Throw new Exception('aucun identifiant de billet envoyé') ;
-            }
-        }
-        elseif ($_GET['action'] == 'addComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    addComment($_GET['id'], $_POST['author'], $_POST['comment']);
-                }
-                else {
-                    Throw new Exception('tous les champs ne sont pas remplis !') ;
-                }
-            }
-            else {
-                Throw new Exception('aucun identifiant de billet envoyé') ;
-            }
-        }
-    }
-    else {
-        listPosts();
-    }
-}
-catch(Exception $e){ // s'il y a une erreur, alors...
-    $errorMessage = $e->getMessage();
-    require('./view/frontend/errorView.php');
-}
+require 'Library\Autoloader.php';
+require 'Library\fonctions.php';
+App\Library\Autoloader::register();
+ 
+
+$router = new RouterPOO();
+
+// ------------------------- Route(URL, nomDuCOntroller, nomDeLaction)
+$router->addRoute(new Route('/home', 'blog', 'home'));
+$router->addRoute(new Route('/', 'blog', 'home'));
+$router->addRoute(new Route('/posts', 'blog', 'posts'));
+//$router->addRoute(new Route('/post', 'blog', 'onePost'));
+$router->addRoute(new Route('/post/(\d+)', 'blog', 'onePost'));
+//$router->addRoute(new Route('/article/(\d+)', 'article', 'article'));
+$router->run();
