@@ -1,83 +1,53 @@
 <?php
 namespace App\Model\Entity;
 
-use App\Library\Entity;
-
-class Post extends Entity
+class Post 
 {
-    protected $auteur,
-              $titre,
-              $contenu,
-              $dateAjout,
-              $dateModif;
-
-    const AUTEUR_INVALIDE = 1;
-    const TITRE_INVALIDE = 2;
-    const CONTENU_INVALIDE = 3;
-
-    public function isValid()
-    {
-      return !(empty($this->auteur) || empty($this->titre) || empty($this->contenu));
-    }
+    protected $id;
+    protected $title;
+    protected $content;
+    protected $creation_date;
+    
     
     // ***** GETTERS *****
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function getContent() {
+        return $this->content;
+    }
+
+    public function getCreation_date() {
+        return $this->creation_date;
+    }
+
+    //***** SETTERS *****
     
-    public function getAuteur() {
-        return $this->auteur;
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
     }
 
-    public function getTitre() {
-        return $this->titre;
+    public function setTitle($title) {
+        $this->title = $title;
+        return $this;
     }
 
-    public function getContenu() {
-        return $this->contenu;
+    public function setContent($content) {
+        $this->content = $content;
+        return $this;
     }
 
-    public function getDateAjout() {
-        return $this->dateAjout;
+    public function setCreation_date(\DateTime $creation_date) {
+        $this->creation_date = $creation_date;
+        return $this;
     }
 
-    public function getDateModif() {
-        return $this->dateModif;
-    }
 
-    // ***** SETTERS *****
     
-    public function setAuteur($auteur) {
-        if (!is_string($auteur) || empty($auteur))
-        {
-          $this->erreurs[] = self::AUTEUR_INVALIDE;
-        }
-        $this->auteur = $auteur;
-        return $this;
-    }
-
-    public function setTitre($titre) {
-        if (!is_string($titre) || empty($titre))
-        {
-          $this->erreurs[] = self::TITRE_INVALIDE;
-        }
-        $this->titre = $titre;
-        return $this;
-    }
-
-    public function setContenu($contenu) {
-        if (!is_string($contenu) || empty($contenu))
-        {
-          $this->erreurs[] = self::CONTENU_INVALIDE;
-        }
-        $this->contenu = $contenu;
-        return $this;
-    }
-
-    public function setDateAjout(\DateTime $dateAjout) {
-        $this->dateAjout = $dateAjout;
-        return $this;
-    }
-
-    public function setDateModif(\DateTime $dateModif) {
-        $this->dateModif = $dateModif;
-        return $this;
-    }
 }

@@ -2,69 +2,60 @@
 
 namespace App\Model\Entity;
 
-use App\Library\Entity;
-
-class Comment extends Entity
+class Comment
 {
-    protected $news,
-              $auteur,
-              $contenu,
-              $date;
-
-    const AUTEUR_INVALIDE = 1;
-    const CONTENU_INVALIDE = 2;
-
-    public function isValid()
-    {
-      return !(empty($this->auteur) || empty($this->contenu));
-    }
+    protected $id;
+    protected $post_id;
+    protected $author;
+    protected $comment;
+    protected $comment_date;
     
-    // ***** GETTERS *****
-    
-    public function getNews() {
-        return $this->news;
+    //***** GETTERS *****
+    public function getId() {
+        return $this->id;
     }
 
-    public function getAuteur() {
-        return $this->auteur;
+    public function getPost_id() {
+        return $this->post_id;
     }
 
-    public function getContenu() {
-        return $this->contenu;
+    public function getAuthor() {
+        return $this->author;
     }
 
-    public function getDate() {
-        return $this->date;
+    public function getComment() {
+        return $this->comment;
     }
-    
-    // ***** SETTERS *****
-    
-    public function setNews($news) {
-        $this->news = (int) $news;
+
+    public function getComment_date() {
+        return $this->comment_date;
+    }
+
+    //***** SETTERS *****
+    public function setId($id) {
+        $this->id = $id;
         return $this;
     }
 
-    public function setAuteur($auteur) {
-        if (!is_string($auteur) || empty($auteur))
-        {
-          $this->erreurs[] = self::AUTEUR_INVALIDE;
-        }
-        $this->auteur = $auteur;
+    public function setPost_id($post_id) {
+        $this->post_id = $post_id;
         return $this;
     }
 
-    public function setContenu($contenu) {
-        if (!is_string($contenu) || empty($contenu))
-        {
-          $this->erreurs[] = self::CONTENU_INVALIDE;
-        }
-        $this->contenu = $contenu;
+    public function setAuthor($author) {
+        $this->author = $author;
         return $this;
     }
 
-    public function setDate(\DateTime $date) {
-        $this->date = $date;
+    public function setComment($comment) {
+        $this->comment = $comment;
         return $this;
     }
+
+    public function setComment_date(\DateTime $comment_date) {
+        $this->comment_date = $comment_date;
+        return $this;
+    }
+
   
 }

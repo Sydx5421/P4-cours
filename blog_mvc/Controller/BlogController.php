@@ -20,11 +20,13 @@ class BlogController
         require 'View/listPostsView.php';
     }
     
-    public function onePost($id) {
+    public function onePost($postId) {
         
         $postsManager = new PostsManager();
+        $commentsManager = new CommentsManager();
         // rendre dynamique le choix du post
-        $post = $postsManager->getPost($id);
+        $post = $postsManager->getPost($postId);
+        $comments = $commentsManager->getComments($postId);
         
         require 'View/onePostView.php';
     }
