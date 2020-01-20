@@ -5,7 +5,7 @@ namespace App\Model\Entity;
 class Comment
 {
     protected $id;
-    protected $post_id;
+    protected $postId;
     protected $author;
     protected $comment;
     protected $comment_date;
@@ -20,7 +20,7 @@ class Comment
         return $this->id;
     }
 
-    public function getPost_id() {
+    public function getPostId() {
         return $this->post_id;
     }
 
@@ -33,6 +33,7 @@ class Comment
     }
 
     public function getComment_date() {
+//        vd($comment->getComment_date());
         return $this->comment_date;
     }
 
@@ -42,8 +43,8 @@ class Comment
         return $this;
     }
 
-    public function setPost_id($post_id) {
-        $this->post_id = $post_id;
+    public function setPostId($postId) {
+        $this->post_id = $postId;
         return $this;
     }
 
@@ -57,8 +58,10 @@ class Comment
         return $this;
     }
 
-    public function setComment_date(\DateTime $comment_date) {
+//    public function setComment_date(\DateTime $comment_date) {
+    public function setComment_date($comment_date) {
         $this->comment_date = $comment_date;
+//        vd($this->comment_date);
         return $this;
     }
 

@@ -13,7 +13,7 @@ class CommentsManager extends Manager
     {
 //        vd('ENTER');
         $db = $this->dbConnect(); 
-        $req = $db->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date');
+        $req = $db->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
 
         $req->execute(array($postId));
         
@@ -36,7 +36,7 @@ class CommentsManager extends Manager
         $db = $this->dbConnect(); 
         $req = $db->prepare('INSERT INTO comments(post_id, author, comment) VALUES(:post_id, :author, :comment)');
         
-        $req->bindValue(':post_id', $comment->getPost_id(), \PDO::PARAM_INT);
+        $req->bindValue(':post_id', $comment->getPostId(), \PDO::PARAM_INT);
         $req->bindValue(':author', $comment->getAuthor());
         $req->bindValue(':comment', $comment->getComment());
 //        $req->bindValue(':date', 'NOW()');
@@ -44,9 +44,9 @@ class CommentsManager extends Manager
         $reqExec = $req->execute();
         
 //        vd($req);
-        vd($reqExec);
+//        vd($reqExec);
         // je suis pas sur de cette ligne..
-        $comment->setId($id);       
+//        $comment->getId();       
         
         return $reqExec;
         

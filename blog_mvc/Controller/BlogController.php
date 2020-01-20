@@ -34,43 +34,28 @@ class BlogController extends AbstractController
         $post = $postsManager->getPost($postId);
         $comments = $commentsManager->getComments($postId);
         
-//        if($this->isPost()){
-//            $comment = new \App\Model\Entity\Comment;
-//            $comment->setAuthor($_POST['author']);
-//            $comment->setComment($_POST['comment']);
-//            $comment->setPost_id($post_id);
-//            $newComment = $commentsManager->postComment($comment);
-//
-//            if ($newComment === false) {
-//                die('Impossible d\'ajouter le commentaire !');
-//            }
-//            else {
-//                header('Location: index.php/post/' . $comment->getPost_id());
-//            }
-//        }
+//        vd($this->isPost());
+        
+        if($this->isPost()){
+            $comment = new \App\Model\Entity\Comment;
+            $comment->setAuthor($_POST['author']);
+            $comment->setComment($_POST['comment']);
+            $comment->setPostId($postId);
+            $newComment = $commentsManager->postComment($comment);
+
+            if ($newComment === false) {
+                die('Impossible d\'ajouter le commentaire !');
+            }
+            else {
+                // On réoriente vers la page du post
+                $referer = $_SERVER['HTTP_REFERER'];
+                header("Location: $referer");
+            }
+        }
         
         require 'View/onePostView.php';
     }
     
-    public function addComment(){// à supprimer 
-//        vd($_POST);
-        $comment = new \App\Model\Entity\Comment;
-        $comment->setAuthor($_POST['author']);
-        $comment->setComment($_POST['comment']);
-        $comment->setPost_id($_POST['post_id']);
-//        vd($comment);
-//        vd('on entre dans la fonction addComment!');
-//        $commentsManager = new CommentsManager();
-        $newComment = $commentsManager->postComment($comment);
-
-        if ($newComment === false) {
-            die('Impossible d\'ajouter le commentaire !');
-        }
-        else {
-            header('Location: index.php/post/' . $comment->getPost_id());
-        }
-        require 'View/onePostView.php';
-    }
     
     public function connection(){
         

@@ -29,7 +29,7 @@ class AbstractController
     protected function isPost(){
         // a faire
         //vérifier si on est en méthode post ou non (si un formulaire a bien été soumis.
-        return isset($_POST);
+        return ($_SERVER['REQUEST_METHOD'] == 'POST');
     }
     
 }
