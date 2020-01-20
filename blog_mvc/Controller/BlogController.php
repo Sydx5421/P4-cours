@@ -59,7 +59,13 @@ class BlogController extends AbstractController
     
     public function connection(){
         
+        $yaml = yaml_parse_file('App\Config\parameters.yml');
+        $parsed = yaml_parse($yaml);
         require 'View/connexionView.php';   
+    }
+    
+    public function edition(){
+        require 'View/newPostView.php'; 
     }
     
 }

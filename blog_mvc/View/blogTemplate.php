@@ -17,6 +17,10 @@
 
     <!-- Mon Style -->
     <link href="<?=$this->basePath?>Public/myStyles.css" rel="stylesheet" />
+    
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({ selector:'textarea.tinymce' });</script>
+
 
 </head>
 
@@ -37,10 +41,10 @@
     
     
     <!-- Page Content -->
-    <div class="col-lg-12 text-center">
+    <main class="col-lg-12 text-center">
         <h2><?= $titleVue ?></h2>
         <?= $content ?>
-    </div>
+    </main>
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.slim.min.js"></script>
