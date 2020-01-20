@@ -78,4 +78,4 @@
     </div>
 </div>
 <?php $content = ob_get_clean();?>
-<?php require('postTemplate.php') ?>
+<?php require('blogTemplate.php') ?>
