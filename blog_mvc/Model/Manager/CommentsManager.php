@@ -28,18 +28,28 @@ class CommentsManager extends Manager
         return $comments;
     }
 
-    public function add(Comment $comment)
+    public function postComment(Comment $comment)
     {
+//        vd('on entre dans la fonction postComment!');
+//        vd($comment->getAuthor());
+        
         $db = $this->dbConnect(); 
-        $req = $db->prepare('INSERT INTO comments SET post_id = :post_id, author = :author, comment = :comment, date = NOW()');
+        $req = $db->prepare('INSERT INTO comments(post_id, author, comment) VALUES(:post_id, :author, :comment)');
         
         $req->bindValue(':post_id', $comment->getPost_id(), \PDO::PARAM_INT);
         $req->bindValue(':author', $comment->getAuthor());
         $req->bindValue(':comment', $comment->getComment());
+//        $req->bindValue(':date', 'NOW()');
         
-        $req->execute();
+        $reqExec = $req->execute();
         
-        $comment->setId($id);        
+//        vd($req);
+        vd($reqExec);
+        // je suis pas sur de cette ligne..
+        $comment->setId($id);       
+        
+        return $reqExec;
+        
     }
     
 }

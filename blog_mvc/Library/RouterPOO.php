@@ -53,7 +53,7 @@ class RouterPOO{
         $relativeRootDir = str_replace($contextDocumentRoot, '', $rootDir);      
         // vérifie si une de ces routes match avec l'url
         $urlRequested = str_replace($relativeRootDir, '', $_SERVER['REQUEST_URI']);
-
+//        vd($contextDocumentRoot, $relativeRootDir);
 //        echo '<pre>';
 //        var_dump($urlRequested);   
 
@@ -72,6 +72,11 @@ class RouterPOO{
             }            
         }     
 
+//        vd($_SERVER["CONTEXT_DOCUMENT_ROOT"], 'REQUEST_URI' . $_SERVER['REQUEST_URI'], $this->getRoutes());
+    }
+    
+    public function getRoutes() {
+        return $this->routes;
     }
     
 }

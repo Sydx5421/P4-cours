@@ -10,6 +10,11 @@ class Comment
     protected $comment;
     protected $comment_date;
     
+    public function isValid(){
+        //vérifie que le post_id est bien un nombre 
+        //vérifie que l'auteur et le commentaire n'est pas vide
+    }
+    
     //***** GETTERS *****
     public function getId() {
         return $this->id;

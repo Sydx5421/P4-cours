@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 use App\Library\Autoloader;
 use App\Library\RouterPOO;
 use App\Library\Route;
@@ -17,5 +19,8 @@ $router->addRoute(new Route('/', 'blog', 'home'));
 $router->addRoute(new Route('/posts', 'blog', 'posts'));
 //$router->addRoute(new Route('/post', 'blog', 'onePost'));
 $router->addRoute(new Route('/post/(\d+)', 'blog', 'onePost'));
+$router->addRoute(new Route('/post/(\d+)/addComment', 'blog', 'addComment'));
+$router->addRoute(new Route('/connection', 'blog', 'connection'));
 //$router->addRoute(new Route('/article/(\d+)', 'article', 'article'));
+
 $router->run();

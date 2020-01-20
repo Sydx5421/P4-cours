@@ -39,17 +39,24 @@
 
             <!-- Comments Form -->
             <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
+                <h5 class="card-header">Laissez un commentaire:</h5>
                 <div class="card-body">
-                    <form>
+                    <form action="" method="post">
+
                         <div class="form-group">
-                            <label for="author">Nom</label>
-                            <input type="text" class="form-control" id="author" placeholder="Votre nom">
+                            <?= isset($erreurs) && in_array(\Entity\Comment::AUTEUR_INVALIDE, $erreurs) ? 'L\'auteur est invalide.<br />' : '' ?>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" rows="3">Votre commentaire</textarea>
+                            <label for="author">Pseudo</label>
+                            <input type="text" class="form-control" id="author" name="author" placeholder="Votre Pseudo" value="<?= isset($comment) ? htmlspecialchars($comment['auteur']) : '' ?>" /><br />
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="form-group">
+                            <?= isset($erreurs) && in_array(\Entity\Comment::CONTENU_INVALIDE, $erreurs)? 'Le contenu est invalide.<br />' : '' ?>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="comment" class="form-control" rows="3"><?= isset($comment) ? htmlspecialchars($comment['contenu']) : 'Votre commentaire' ?></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Commenter</button>
                     </form>
                 </div>
             </div>
