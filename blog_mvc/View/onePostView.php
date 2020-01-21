@@ -14,7 +14,7 @@
             <!-- Author -->
             <p class="lead">
               by
-              <a href="#">Jean Forteroche</a>
+              <a href="#">Jean Forteroche</a><?php echo($_SESSION['adminConnected']); ?>
             </p>
 
             <hr>
@@ -22,12 +22,12 @@
             <!-- Date/Time -->
             <p><?= ($post->getCreation_date())?></p>
 
-            <hr>
+<!--            <hr>
 
-            <!-- Preview Image -->
+             Preview Image 
             <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
 
-            <hr>
+            <hr>-->
 
             <!-- Post Content -->
 

@@ -16,7 +16,9 @@
     Avec le des données dynamique provenant de la BDD...
     <br/>
     Comming up soon !<br/>
-    <?= $data ?>
+    <?php if(isset($data)): ?>
+        <?= $data; ?>
+    <?php endif; ?>
 </p>
 <a href="posts">voir les posts</a>
 <?php $content = ob_get_clean();?>

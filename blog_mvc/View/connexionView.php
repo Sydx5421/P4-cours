@@ -1,7 +1,9 @@
 <?php $titleVue = "Connectez-vous"; ?>
 <?php ob_start(); ?>
 <div class="card-body text-center">
-    <?php if($adminConnected === false): ?>
+    <?php // if($adminConnected === false): ?>
+    <?php if(!isset($_SESSION['adminConnected']) || $_SESSION['adminConnected'] === false): ?>
+    <?php // vd($_SESSION['adminConnected']); ?>
     <form action="" method="post" class="col-md-8 col-lg-6 text-center">
         <div class="input-group form-group">
             <div class="input-group-prepend">
@@ -22,6 +24,7 @@
     </form>
     <?php else: ?>
         <h3>Bienvenue sur votre tableau de bord Jean</h3>
+        <?php echo($_SESSION['adminConnected']); ?>
     <?php endif; ?>
 </div>
 <a href="posts">voir les posts</a>

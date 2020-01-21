@@ -58,24 +58,25 @@ class BlogController extends AbstractController
     
     
     public function connection(){
-        $adminConnected = false;
-        if($this->isPost()){
+//        $adminConnected = false;
+        if($this->isPost() && isset($_POST['admin']) && isset($_POST['mdp'])){
             $yaml = yaml_parse_file('./Config/parameters.yml');
             
             $authorisedAdmin = $yaml["admin_login"];
             $mdp = $yaml["admin_password"];
-//            vd($authorisedAdmin, $mdp, $_POST);
+            
             if($_POST['admin']===$authorisedAdmin && $_POST['mdp']===$mdp){
-//                vd('Connection');
-                $adminConnected = true;            
+                $_SESSION['adminConnected'] = true;            
             }
-//            else{
-////                vd('Erreur d\'authentification');
-//                $adminConnected = false;
-//            }
         }
                         
         require 'View/connexionView.php';   
+    }
+    
+    public function deconnection(){
+        session_destroy();
+        $referer = $this->basePath . "home";
+        header("Location: $referer");
     }
     
     public function postEdition(){
