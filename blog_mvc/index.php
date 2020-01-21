@@ -21,10 +21,14 @@ $router->addRoute(new Route('/posts', 'blog', 'posts'));
 $router->addRoute(new Route('/post/(\d+)', 'blog', 'onePost'));
 $router->addRoute(new Route('/post/(\d+)/addComment', 'blog', 'addComment'));
 $router->addRoute(new Route('/connection', 'blog', 'connection'));
-$router->addRoute(new Route('/deconnection', 'blog', 'deconnection'));
 
 //pages réserver à l'admin
-$router->addRoute(new Route('/postEdition', 'blog', 'postEdition'));
+//if(isset($_SESSION['adminConnected']) && $_SESSION['adminConnected'] === true ){
+    $router->addRoute(new Route('/deconnection', 'blog', 'deconnection'));
+    $router->addRoute(new Route('/postEdition', 'blog', 'postEdition'));    
+//}
+
+
 //$router->addRoute(new Route('/article/(\d+)', 'article', 'article'));
 
 $router->run();

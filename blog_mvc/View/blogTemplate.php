@@ -43,7 +43,7 @@
     }?>
     
     <h1 style="color: orange;">Session statut : <?php var_dump(isset($_SESSION['adminConnected'])) ; ?></h1>
-    
+
     <!-- Page Content -->
     <main class="col-lg-12">
         <h2 class="text-center"><?= $titleVue ?></h2>

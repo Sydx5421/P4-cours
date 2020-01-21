@@ -14,7 +14,7 @@
             <!-- Author -->
             <p class="lead">
               by
-              <a href="#">Jean Forteroche</a><?php echo($_SESSION['adminConnected']); ?>
+              <a href="#">Jean Forteroche</a>
             </p>
 
             <hr>
@@ -32,7 +32,7 @@
             <!-- Post Content -->
 
             <div class="text-justify" style="word-break: break-word;">
-                <?= nl2br(htmlspecialchars($post->getContent())) ?>
+                <?= nl2br($post->getContent()) ?>
             </div>
 
             <hr>

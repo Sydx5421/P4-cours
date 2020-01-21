@@ -12,11 +12,7 @@ class BlogController extends AbstractController
 {    
     
     public function home(){
-//        echo('je suis la page home');
-        $data = 'mes données provenant du controller (soon via le Model...)'; //peut être utilisé directement car le require est fait au sein de  la méthode
-        
-        $this->addFlash('Coucou', 'success');
-        
+
         require 'View/home.php';   
     }
     
@@ -66,7 +62,10 @@ class BlogController extends AbstractController
             $mdp = $yaml["admin_password"];
             
             if($_POST['admin']===$authorisedAdmin && $_POST['mdp']===$mdp){
-                $_SESSION['adminConnected'] = true;            
+                $_SESSION['adminConnected'] = true;         
+                $this->addFlash('Bienvenue ', 'success');
+            }else{
+                $this->addFlash('Erreur, le mot de passe et/ou le login sont incorrectes', 'danger');
             }
         }
                         
@@ -75,6 +74,9 @@ class BlogController extends AbstractController
     
     public function deconnection(){
         session_destroy();
+        session_start();// On redémarre une session anonyme pour pouvoir afficher le message de déconnexion
+        $this->addFlash('Deconnexion ', 'danger');
+        
         $referer = $this->basePath . "home";
         header("Location: $referer");
     }

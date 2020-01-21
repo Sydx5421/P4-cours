@@ -10,12 +10,8 @@
     </div>
 </div>
 
-<p>Voici la page d'accueil de mon blog</p>
-<h3>Contenu spécifique à la vue demandée</h3>
+
 <p>
-    Avec le des données dynamique provenant de la BDD...
-    <br/>
-    Comming up soon !<br/>
     <?php if(isset($data)): ?>
         <?= $data; ?>
     <?php endif; ?>

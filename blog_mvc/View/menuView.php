@@ -17,10 +17,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?=$this->basePath?>connection">Connection</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?=$this->basePath?>postEdition">Edition</a>
-                </li>
                 <?php if(isset($_SESSION['adminConnected']) && $_SESSION['adminConnected'] === true ): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=$this->basePath?>postEdition">Edition</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?=$this->basePath?>deconnection">Déconnection</a>
                     </li>
