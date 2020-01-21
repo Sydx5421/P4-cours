@@ -18,20 +18,24 @@ class CommentsManager extends Manager
         $req->execute(array($postId));
         
 //        $comments = array();
-        
-        while($comment = $req->fetchObject('App\Model\Entity\Comment')){
-                $comments[] = $comment;
-            }
-        
+        $comment = $req->fetchObject('App\Model\Entity\Comment');
+//        vd($comment);
+        $comments = [];
+        if($comment != false){
+            while($comment = $req->fetchObject('App\Model\Entity\Comment')){
+//                    vd($comment);
+                    $comments[] = $comment;
+                }            
+                
             $req->closeCursor();
+        
+        }
         
         return $comments;
     }
 
     public function postComment(Comment $comment)
     {
-//        vd('on entre dans la fonction postComment!');
-//        vd($comment->getAuthor());
         
         $db = $this->dbConnect(); 
         $req = $db->prepare('INSERT INTO comments(post_id, author, comment) VALUES(:post_id, :author, :comment)');
@@ -39,14 +43,8 @@ class CommentsManager extends Manager
         $req->bindValue(':post_id', $comment->getPostId(), \PDO::PARAM_INT);
         $req->bindValue(':author', $comment->getAuthor());
         $req->bindValue(':comment', $comment->getComment());
-//        $req->bindValue(':date', 'NOW()');
         
         $reqExec = $req->execute();
-        
-//        vd($req);
-//        vd($reqExec);
-        // je suis pas sur de cette ligne..
-//        $comment->getId();       
         
         return $reqExec;
         

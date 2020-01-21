@@ -1,7 +1,9 @@
 <?php
 //94 Brouillon
 namespace App\Model\Manager;
- 
+
+use App\Model\Entity\Post;
+
 require_once('Manager.php');
 
 
@@ -44,4 +46,16 @@ class PostsManager extends Manager
 
         return $post;
     }
+    
+    public function postPost(Post $post)
+    {
+        $db = $this->dbConnect(); 
+        $req = $db->prepare('INSERT INTO posts(content) VALUES(:content)');
+        
+        $req->bindValue(':content', $post->getContent());
+        $reqExec = $req->execute();
+        
+        return $reqExec;        
+    }
+    
 }

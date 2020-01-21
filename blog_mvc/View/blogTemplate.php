@@ -20,6 +20,8 @@
     
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>tinymce.init({ selector:'textarea.tinymce' });</script>
+    
+    <script src="https://kit.fontawesome.com/f35eb86e13.js" crossorigin="anonymous"></script>
 
 
 </head>
@@ -41,8 +43,8 @@
     
     
     <!-- Page Content -->
-    <main class="col-lg-12 text-center">
-        <h2><?= $titleVue ?></h2>
+    <main class="col-lg-12">
+        <h2 class="text-center"><?= $titleVue ?></h2>
         <?= $content ?>
     </main>
 

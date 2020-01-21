@@ -23,7 +23,7 @@ $router->addRoute(new Route('/post/(\d+)/addComment', 'blog', 'addComment'));
 $router->addRoute(new Route('/connection', 'blog', 'connection'));
 
 //pages réserver à l'admin
-$router->addRoute(new Route('/edition', 'blog', 'edition'));
+$router->addRoute(new Route('/postEdition', 'blog', 'postEdition'));
 //$router->addRoute(new Route('/article/(\d+)', 'article', 'article'));
 
 $router->run();

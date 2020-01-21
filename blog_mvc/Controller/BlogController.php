@@ -7,6 +7,7 @@ use App\Model\Manager\PostsManager;
 use App\Model\Manager\CommentsManager;
 
 
+
 class BlogController extends AbstractController
 {    
     
@@ -26,15 +27,14 @@ class BlogController extends AbstractController
         require 'View/listPostsView.php';
     }
     
+    // Affichage d'un Post et de ses commentaires + ajout de commentaires
     public function onePost($postId) {
         
         $postsManager = new PostsManager();
         $commentsManager = new CommentsManager();
-        // rendre dynamique le choix du post
+        
         $post = $postsManager->getPost($postId);
         $comments = $commentsManager->getComments($postId);
-        
-//        vd($this->isPost());
         
         if($this->isPost()){
             $comment = new \App\Model\Entity\Comment;
@@ -58,13 +58,43 @@ class BlogController extends AbstractController
     
     
     public function connection(){
-        
-        $yaml = yaml_parse_file('App\Config\parameters.yml');
-        $parsed = yaml_parse($yaml);
+        $adminConnected = false;
+        if($this->isPost()){
+            $yaml = yaml_parse_file('./Config/parameters.yml');
+            
+            $authorisedAdmin = $yaml["admin_login"];
+            $mdp = $yaml["admin_password"];
+//            vd($authorisedAdmin, $mdp, $_POST);
+            if($_POST['admin']===$authorisedAdmin && $_POST['mdp']===$mdp){
+//                vd('Connection');
+                $adminConnected = true;            
+            }
+//            else{
+////                vd('Erreur d\'authentification');
+//                $adminConnected = false;
+//            }
+        }
+                        
         require 'View/connexionView.php';   
     }
     
-    public function edition(){
+    public function postEdition(){
+        $postsManager = new PostsManager();
+        if($this->isPost()){
+            $post = new \App\Model\Entity\Post;
+            $post->setContent($_POST['contentPost']);
+            $newPost = $postsManager->postPost($post);
+
+            if ($newPost === false) {
+                die('Impossible d\'ajouter le l\'article !');
+            }
+            else {
+                // On réoriente vers la page du post
+                $referer = $this->basePath . "postEdition";
+                header("Location: $referer");
+            }
+        }
+        
         require 'View/newPostView.php'; 
     }
     

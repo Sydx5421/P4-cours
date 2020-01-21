@@ -18,7 +18,7 @@
                         <a class="nav-link" href="<?=$this->basePath?>connection">Connection</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?=$this->basePath?>edition">Edition</a>
+                        <a class="nav-link" href="<?=$this->basePath?>postEdition">Edition</a>
                     </li>
                 </ul>
             </div>
