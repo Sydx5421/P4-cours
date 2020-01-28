@@ -50,4 +50,25 @@ class CommentsManager extends Manager
         
     }
     
+    public function getALlComments(){
+        $db = $this->dbConnect(); 
+        $req = $db->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM comments ORDER BY comment_date DESC');
+        
+        $req->execute();
+        
+        $comment = $req->fetchObject('App\Model\Entity\Comment');
+        
+        $comments = [];
+        if($comment != false){
+            while($comment = $req->fetchObject('App\Model\Entity\Comment')){
+                $comments[] = $comment;
+            }            
+                
+            $req->closeCursor();        
+        }
+        
+        return $comments;
+        
+    }
+    
 }

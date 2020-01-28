@@ -1,9 +1,10 @@
 <?php $titleVue = "Page des Posts"; ?>
+<?php $pageClass = "insideBlog"?>
 <?php ob_start(); ?>
 
     
 <section id="section_article">
-    <div class="container bg-white">
+    <div class="container">
         <div id="div_article" class="row text-left">
             <div class="col-md-12">
                 <?php //* @var $post App\Model\Entity\Post */ ?>

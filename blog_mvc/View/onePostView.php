@@ -1,4 +1,5 @@
-<?php $titleVue = "Page d'un Post"; ?>
+<?php $titleVue = htmlspecialchars($post->getTitle()); ?>
+<?php $pageClass = "onePostVIew"?>
 <!-- Page Content -->
 <?php ob_start(); ?>
 <div class="container">
@@ -6,16 +7,24 @@
     <div class="row">
 
         <!-- Post Content Column -->
-        <div class="col-lg-8">
+        <div class="col-lg-12">
 
             <!-- Title -->
-            <h1 class="mt-4"><?= htmlspecialchars($post->getTitle()) ?></h1>
+            <!--<h1 class="mt-4"><? // echo htmlspecialchars($post->getTitle()) ?></h1>-->
 
             <!-- Author -->
-            <p class="lead">
-              by
-              <a href="#">Jean Forteroche</a>
-            </p>
+            <div class="d-flex justify-content-between">
+                <p class="lead">
+                  by
+                  <a href="#">Jean Forteroche</a>
+                </p>
+                <?php if(isset($_SESSION['adminConnected'])): ?>
+                    <div>
+                        <button type="button" class="btn btn-secondary">Editer</button>
+                        <button type="button" class="btn btn-danger">Supprimer</button>
+                    </div>                
+                <?php endif; ?>
+            </div>
 
             <hr>
 
@@ -68,6 +77,13 @@
                     <div class="media-body">
                         <h5 class="mt-0"><?= htmlspecialchars($comment->getAuthor()) ?> - le <?= htmlspecialchars($comment->getComment_date()) ?></h5>
                         <?= htmlspecialchars($comment->getComment()) ?>
+                    </div>
+                    <div>
+                        <?php if(!isset($_SESSION['adminConnected']) || $_SESSION['adminConnected'] === false): ?>
+                            <a class="nwl_signaler" href=""><i class="fas fa-flag"></i></a>
+                        <?php else: ?>
+                            <a class="nwl_suprimer" href=""><i class="fas fa-trash"></i></a>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>

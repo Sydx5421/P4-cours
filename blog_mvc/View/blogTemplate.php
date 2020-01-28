@@ -8,15 +8,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?= $titleVue ?> - Start Bootstrap Template</title>
+    <title>Jean Forteroche - le blog</title>
 
     <!-- Bootstrap core CSS -->
     <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!--<link href="./public/css/style_blog.css" rel="stylesheet" />--> 
 
+    <link rel="icon" href="<?=$this->basePath?>Public/img/ticket_favicon.ico">
+    
+    
+    <!--Polices-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet"> 
+    
     <!-- Mon Style -->
     <link href="<?=$this->basePath?>Public/myStyles.css" rel="stylesheet" />
+    
     
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>tinymce.init({ selector:'textarea.tinymce' });</script>
@@ -26,11 +34,14 @@
 
 </head>
 
-<body>
-     
-
+<body class="<?=$pageClass?>">
     <!-- Navigation -->
     <?php require('menuView.php'); ?>
+    <header>
+        <h1 class="text-center"><?= $titleVue ?></h1>
+    </header>
+    <hr class="sub_header"/> 
+
     
     <!--Gestion du messge flash-->
     <?php if(isset($_SESSION['message_flash'])){?>
@@ -41,14 +52,47 @@
     <?php
         unset($_SESSION['message_flash']);
     }?>
+    <!------------------- End flash--------------------->
     
-    <h1 style="color: orange;">Session statut : <?php var_dump(isset($_SESSION['adminConnected'])) ; ?></h1>
+    <!--<h1 style="color: orange;">Session statut : <?php var_dump(isset($_SESSION['adminConnected'])) ; ?></h1>-->
 
     <!-- Page Content -->
     <main class="col-lg-12">
-        <h2 class="text-center"><?= $titleVue ?></h2>
         <?= $content ?>
     </main>
+    
+    <footer>
+        <div class="nwl_copyright">Copyright © 2020 Jean Forteroche</div>
+        <div class="nwl_link_footer">
+            <div>
+                <p>blog</p>
+                <ul>
+                    <li class="active">
+                        <a href="<?=$this->basePath?>home">Accueil
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li>
+                         <a href="<?=$this->basePath?>posts">Articles</a>
+                    </li>
+                    <li>
+                        <a href="<?=$this->basePath?>connection">Connection</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <p>administration</p>
+                <ul>
+                    <li>
+                        <a href="<?=$this->basePath?>postEdition">Edition</a>
+                    </li>
+                    <li>
+                        <a href="<?=$this->basePath?>deconnection">Déconnection</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.slim.min.js"></script>

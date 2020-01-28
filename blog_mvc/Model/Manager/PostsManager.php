@@ -47,6 +47,18 @@ class PostsManager extends Manager
         return $post;
     }
     
+    public function getLastPost()
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 1');
+        
+        $lastPost = $req->fetchObject('App\Model\Entity\Post');
+
+        $req->closeCursor();
+
+        return $lastPost;
+    }
+    
     public function postPost(Post $post)
     {
         $db = $this->dbConnect(); 

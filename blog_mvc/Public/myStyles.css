@@ -1,5 +1,155 @@
-/************* HOME *************/
 
+/************ GENERAL ***********/
+*{
+    font-family: 'Roboto Mono', monospace;
+    
+}
+h1{
+    color: #fff;
+}
+hr.sub_header{
+    color: #0f3642;
+    height: 20px;
+    background: #0f3642;
+    margin: 0;
+    margin-bottom: 2rem;
+    border: none;
+}
+
+.btn-primary, .btn-secondary{
+    background-color: #0f3642;
+    border-color: #0f3642;
+    color: #d0deeb;
+}
+.btn-primary:hover, .btn-secondary:hover{
+    background-color: #d0deeb;
+    border-color: #0f3642;
+    color: #0f3642;
+}
+h3{
+    text-align: center;
+}
+h3 + hr{
+    color: #87afc9;
+    height: 1px;
+    background: #87afc9;
+    margin: 1.5rem auto;
+    border: none;
+    width: 25%;
+}
+
+.nwl_signaler, .nwl_suprimer{
+    color: #df1818;
+}
+.nwl_signaler:hover, .nwl_suprimer:hover{
+    color: #a81313;
+}
+
+
+/*----------- GENERAL ----------*/
+
+/************* NAV **************/
+.bg-dark{
+    background-color: #0f3642 !important;
+}
+/*------------ NAV -------------*/
+
+
+/************ HEADER ************/
+.onePostVIew header,
+.connexion_dashboard header,
+.insideBlog header{
+    height: 20vh;
+}
+.blogHome header{
+    height: 40vh;
+}
+header{
+    background-image: url("img/alaska.jpg");
+    /*height: 40vh;*/
+    /*border: 1px solid #000;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: -13px -7px 20px rgba(15,54,66,0.45), 13px -7px 20px rgba(15,54,66,0.45), 13px 7px 20px rgba(15,54,66,0.45), -13px 7px 20px rgba(15,54,66,0.45), -13px 7px 20px rgba(15,54,66,0.45);    color: #fff;
+}
+/*----------- HEADER -----------*/
+
+/************ Body **************/
+body{
+    position: relative;
+    min-height: 100vh;
+    background-color: #dbe9ff;
+    /*background-color: #2199cd;*/
+    /*background-image: url("img/alaska.jpg");*/
+    /*background-repeat: no-repeat;*/
+/*    background-attachment: fixed;
+    background-position: center; */
+}
+/*------------ Body ------------*/
+
+
+/************ Footer ************/
+footer {
+    margin-top: 4rem;
+    padding: 1rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 60px;
+    background: #0f3642;
+    color: #FFFFFF;
+}
+
+footer ul{
+    list-style: none;
+}
+footer ul a{
+    text-decoration: none;
+    color: #d0deeb;
+}
+footer ul a:hover{
+    color: #87afc9;
+    text-decoration: none;
+}
+
+
+footer .nwl_copyright{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+footer .nwl_link_footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/*---------- Footer ------------*/
+
+/************* HOME *************/
+main{
+    color: #0f3642;
+    padding-bottom: 14rem;
+}
+.nwl_last_article{
+    /*background-color: #fff;*/
+    background-color: #dbe9ff;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+span.title, span.author{
+    display: block;
+}
+span.title{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 63px;
+    font-weight: bold;
+}
+span.author{
+    font-family: 'Shadows Into Light', cursive;
+}
 /*---------- FIN HOME -----------*/
 
 
@@ -11,12 +161,49 @@ article{
 /*------- FIN list Posts --------*/
 
 /************* POST *************/
+.onePostVIew form{
+    margin: 1rem auto;
+}
 /*------------------------------*/
 
 /********** INSCRIPTION *********/
 /*------------------------------*/
 
 /********** CONNECTION **********/
+form{
+    margin: 3rem auto;
+}
+.connexion_dashboard table{
+    
+}
+.connexion_dashboard table tbody{
+/*    display: block;
+    max-height: 300px;
+    overflow-y: scroll;
+    width: 100%;*/
+}
+.tableFixHead{ 
+    overflow-y: auto; 
+    height: 100px; 
+}
+.tableFixHead thead th { 
+    position: sticky; 
+    top: 0; 
+}
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#eee; }
+.connexion_dashboard table tbody td{
+    width: 100%;
+}
+/*table thead {
+     display: table-header-group;
+}*/
+td, th{
+    border: 1px solid;
+}
 /*------------------------------*/
 
 

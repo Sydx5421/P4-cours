@@ -12,7 +12,8 @@ class BlogController extends AbstractController
 {    
     
     public function home(){
-
+        $postsManager = new PostsManager();
+        $lastPost = $postsManager->getLastPost();
         require 'View/home.php';   
     }
     
@@ -68,6 +69,9 @@ class BlogController extends AbstractController
                 $this->addFlash('Erreur, le mot de passe et/ou le login sont incorrectes', 'danger');
             }
         }
+        
+        $commentsManager = new CommentsManager();
+        $comments = $commentsManager->getAllComments();
                         
         require 'View/connexionView.php';   
     }
