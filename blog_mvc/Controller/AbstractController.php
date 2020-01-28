@@ -6,6 +6,7 @@ class AbstractController
 {
     protected $basePath;//chemin de base de mon site pour faire des lien absolu
     //Créer un attribut isAdmin qui permettra de savoir si l'admin est connécté ou non
+    protected $isAdmin = false;
     
     public function __construct() {
         
@@ -15,6 +16,10 @@ class AbstractController
 //        vd($contextDocumentRoot, $relativeRootDir);
         
         $this->basePath =  $_SERVER["REQUEST_SCHEME"] . '://' . $_SERVER["HTTP_HOST"] . $relativeRootDir . '/';
+        
+        // mettre la condition en place  pour vérifier si l'admin est connecté
+//        $this->isAdmin = ; // vérifier si la personne est admin
+        
     }
     
     

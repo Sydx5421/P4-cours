@@ -75,7 +75,7 @@
                 <div class="media mb-4">
                     <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                     <div class="media-body">
-                        <h5 class="mt-0"><?= htmlspecialchars($comment->getAuthor()) ?> - le <?= htmlspecialchars($comment->getComment_date()) ?></h5>
+                        <h5 class="mt-0"><?= htmlspecialchars($comment->getAuthor()) ?> - le <?= $comment->getComment_date() ?></h5>
                         <?= htmlspecialchars($comment->getComment()) ?>
                     </div>
                     <div>
@@ -89,9 +89,28 @@
             <?php endforeach; ?>
           <!-- Comment with nested comments -->
           <!-- [...] -->
-
         </div>
     </div>
 </div>
 <?php $content = ob_get_clean();?>
 <?php require('blogTemplate.php') ?>
+
+<script>
+    // evenement sur mon bouton me permet de savoir quand il est cliqué
+    // récupérer tous les bouton avec une class ! on obtient un objet htmlCollection qu'on va parcourir
+    // data-id 
+    // puis pour chaque bouton on cré l'evt au click appel AJAX : 
+    // objet xmlhttpRequest va nous permettre de faire une requette
+    let xhr = new XMLHttpRequest();
+    let formData = new FormData(); //objet permettant de transmettre des données en POST
+    formData.append('id', '2'); // Permet d'ajouter une donnée à l'objet sous la form clé valeur ! 
+    xhr.open('POST','http://localhost/P4-cours/blog_mvc/home' );
+    xhr.addEventListener('load', ()=>{
+        if(xhr.status>=200 && xhr.status < 400){
+            let response = JSON.parse(xhr.response);
+            console.log(response);// l'objet Json
+            console.log(response.result); // renvoie juste l'objet.
+        }
+    });
+    xhr.send(formData);
+</script>

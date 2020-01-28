@@ -12,6 +12,12 @@ class BlogController extends AbstractController
 {    
     
     public function home(){
+        // vérifié si on est en mode post
+//        $response = new \stdClass();
+//        $response->result = $_POST['id'];
+//        echo json_encode($response);
+////        vd($response);
+//        die;
         $postsManager = new PostsManager();
         $lastPost = $postsManager->getLastPost();
         require 'View/home.php';   

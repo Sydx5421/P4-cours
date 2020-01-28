@@ -44,7 +44,7 @@
                         <?php foreach ($comments as $comment):?>
                             <tr class="d-flex">
                                 <td class="col-8">
-                                    <h5 class="mt-0"><?= htmlspecialchars($comment->getAuthor()) ?> - le <?= htmlspecialchars($comment->getComment_date()) ?></h5>
+                                    <h5 class="mt-0"><?= htmlspecialchars($comment->getAuthor()) ?> - le <?= $comment->getComment_date(); ?></h5>
                                     <?= htmlspecialchars($comment->getComment()) ?>
                                 </td>
                                 <td class="col-1">
