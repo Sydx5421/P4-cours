@@ -93,22 +93,57 @@ class BlogController extends AbstractController
     
     public function postEdition(){
         $postsManager = new PostsManager();
-        if($this->isPost()){
-            $post = new \App\Model\Entity\Post;
-            $post->setContent($_POST['contentPost']);
-            $newPost = $postsManager->postPost($post);
-
-            if ($newPost === false) {
-                die('Impossible d\'ajouter le l\'article !');
-            }
-            else {
-                // On réoriente vers la page du post
-                $referer = $this->basePath . "postEdition";
-                header("Location: $referer");
-            }
-        }
         
-        require 'View/newPostView.php'; 
-    }
-    
+        $messageFlash;
+        $messageType;
+        $referer;
+        
+        if($this->isPost()){
+            if(!$_POST['contentPost'] || !$_POST['postTitle']){
+                $Title = isset($_POST['postTitle']) ? $_POST['postTitle'] : '';
+                $Content = isset($_POST['contentPost']) ? $_POST['contentPost'] : '';                
+                
+                $messageFlash = 'Tous les champs doivent être remplit';
+                $messageType = 'danger';
+                                
+                $referer = "postEdition";
+                
+            }else{
+                $post = new \App\Model\Entity\Post;
+                
+                $post->setContent($_POST['contentPost']);
+                $post->setTitle($_POST['postTitle']);
+                $newPost = $postsManager->postPost($post);
+            
+                if ($newPost === false) {
+                    
+                    $messageFlash = 'Votre Article n\'a pas pu être enregistré';
+                    $messageType = 'danger';
+                    
+                    $referer = "postEdition";                    
+                }
+                else {
+                    $messageFlash = 'Votre Article a bien été posté';
+                    $messageType = 'success';
+                    
+                    $referer = $this->basePath . "posts";
+                    
+                    header("Location: $referer");
+                }                
+            }            
+        }
+        if(isset($messageFlash) && isset($messageType)){
+            $this->addFlash($messageFlash, $messageType);        
+        }
+         
+        if(isset($referer)){
+            if($referer === "posts"){                
+                require 'View/listPostsView.php';
+            }elseif($referer === "postEdition"){
+                require 'View/newPostView.php';
+            }            
+        }else{
+            require 'View/newPostView.php';
+        }
+    }    
 }

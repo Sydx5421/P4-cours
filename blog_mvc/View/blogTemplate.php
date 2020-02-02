@@ -27,7 +27,20 @@
     
     
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>tinymce.init({ selector:'textarea.tinymce' });</script>
+    <script>
+        tinymce.init({
+            selector:'textarea.tinymce',
+            style_formats: [ // Initialisation du tinyMCE sans h1
+            {title: 'Heading 2', format: 'h2'},
+            {title: 'Heading 3', format: 'h3'},
+            {title: 'Heading 4', format: 'h4'},
+            {title: 'Heading 5', format: 'h5'},
+            {title: 'Heading 6', format: 'h6'},
+            {title: 'Normal', block: 'p'},
+        ]    
+        });
+        
+    </script>
     
     <script src="https://kit.fontawesome.com/f35eb86e13.js" crossorigin="anonymous"></script>
 
@@ -45,10 +58,9 @@
     
     <!--Gestion du messge flash-->
     <?php if(isset($_SESSION['message_flash'])){?>
-    <div class="alert <?= $_SESSION['message_flash']['type']; ?>">
-        <?= $_SESSION['message_flash']['message']; ?>
-    </div>
-    
+        <div class="alert <?= $_SESSION['message_flash']['type']; ?>">
+            <?= $_SESSION['message_flash']['message']; ?>
+        </div>    
     <?php
         unset($_SESSION['message_flash']);
     }?>

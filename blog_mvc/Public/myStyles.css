@@ -177,10 +177,9 @@ form{
     
 }
 .connexion_dashboard table tbody{
-/*    display: block;
+    display: block;
     max-height: 300px;
-    overflow-y: scroll;
-    width: 100%;*/
+    overflow-y: scroll;    
 }
 .tableFixHead{ 
     overflow-y: auto; 
@@ -201,8 +200,8 @@ th     { background:#eee; }
 /*table thead {
      display: table-header-group;
 }*/
-td, th{
-    border: 1px solid;
+td{
+    border: 1px solid #eee;
 }
 /*------------------------------*/
 

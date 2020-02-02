@@ -62,9 +62,10 @@ class PostsManager extends Manager
     public function postPost(Post $post)
     {
         $db = $this->dbConnect(); 
-        $req = $db->prepare('INSERT INTO posts(content) VALUES(:content)');
+        $req = $db->prepare('INSERT INTO posts(title, content) VALUES(:title, :content)');
         
         $req->bindValue(':content', $post->getContent());
+        $req->bindValue(':title', $post->getTitle());
         $reqExec = $req->execute();
         
         return $reqExec;        
