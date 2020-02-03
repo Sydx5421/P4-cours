@@ -7,7 +7,8 @@
 <?php // echo($content); ?>
 <div class="container">
     <h3>Editer un nouvel article</h3>
-    <form action="" method="post">        
+    <form action="" method="post">
+        <input id="postId" name="postId" type="hidden" value="<?php echo(isset($postId)? $postId : ''); ?>">
         <div class="form-group">
             <label for="postTitle">Titre de l'article</label>
             <input type="text" class="form-control form-control-lg" id="postTitle" name="postTitle" aria-describedby="Titre de l'article" placeholder="Chapitre_ : Titre du chapitre ou de l'article" value="<?php echo(isset($title)? $title : ''); ?>">

@@ -97,8 +97,7 @@ class BlogController extends AbstractController
 //        vd('Action post edition');
         $messageFlash;
         $messageType;
-        $referer;
-        
+        $referer;        
         
         if(isset($postId)){
             $post = $postsManager->getPost($postId);
@@ -114,6 +113,7 @@ class BlogController extends AbstractController
         }
         
         if($this->isPost()){
+            
             if(!$_POST['contentPost'] || !$_POST['postTitle']){
                 $title = isset($_POST['postTitle']) ? $_POST['postTitle'] : '';
                 $content = isset($_POST['contentPost']) ? $_POST['contentPost'] : '';                
@@ -124,27 +124,51 @@ class BlogController extends AbstractController
                 $referer = "postEdition";
                 
             }else{
-                $post = new \App\Model\Entity\Post;
-                
-                $post->setContent($_POST['contentPost']);
-                $post->setTitle($_POST['postTitle']);
-                $newPost = $postsManager->postPost($post);
-            
-                if ($newPost === false) {
-                    
-                    $messageFlash = 'Votre Article n\'a pas pu être enregistré';
-                    $messageType = 'danger';
-                    
-                    $referer = "postEdition";                    
+                if(isset($_POST['postId'])){// UPDATE   
+                    $post = $postsManager->getPost($_POST['postId']);
+                    $post->setContent($_POST['contentPost']);
+                    $post->setTitle($_POST['postTitle']);
+//                    vd($post, $post->getContent(), $post->getId(), $post->getTitle());
+                    // faire mon update ici
+                    // créer la fonciton update post
+                    $updatedPost = $postsManager->updatePost($post);
+//                    vd("On post un formulaire et les var title et content sont bien rempli Et on a un post Id", '$updatedPost', $updatedPost );
+                }else{
+                    $post = new \App\Model\Entity\Post;                
+                    $post->setContent($_POST['contentPost']);
+                    $post->setTitle($_POST['postTitle']);
+                    $newPost = $postsManager->postPost($post);
                 }
-                else {
-                    $messageFlash = 'Votre Article a bien été posté';
-                    $messageType = 'success';
-                    
-                    $referer = $this->basePath . "posts";
-                    
-                    header("Location: $referer");
-                }                
+                
+                if(isset($newPost)){ // Cas de la création d'un post
+                    if ($newPost === false) {                    
+                        $messageFlash = 'Votre Article n\'a pas pu être enregistré';
+                        $messageType = 'danger';
+
+                        $referer = "postEdition";                    
+                    }else{
+                        $messageFlash = 'Votre Article a bien été posté';
+                        $messageType = 'success';
+
+                        $referer = $this->basePath . "posts";
+
+                        header("Location: $referer");
+                    }
+                }elseif(isset ($updatedPost)){
+                    if ($updatedPost === false) {                    
+                        $messageFlash = 'Votre Article n\'a pas pu être mis à jour';
+                        $messageType = 'danger';
+
+                        $referer = "postEdition";                    
+                    }else{
+                        $messageFlash = 'Votre Article a bien été mis à jour';
+                        $messageType = 'success';
+
+                        $referer = $this->basePath . "posts";
+
+                        header("Location: $referer");
+                    }
+                }
             }            
         }
         

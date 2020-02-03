@@ -28,9 +28,7 @@ class PostsManager extends Manager
 
         $req->closeCursor();
 
-        return $posts;
-        
-        
+        return $posts;               
     }
 
     public function getPost($postId=1)
@@ -70,5 +68,20 @@ class PostsManager extends Manager
         
         return $reqExec;        
     }
+    
+    public function updatePost(Post $post)
+    {
+        $db = $this->dbConnect(); 
+        $req = $db->prepare('UPDATE posts SET title = :title, content = :content WHERE id =' . $post->getId());
+        
+        $req->bindValue(':content', $post->getContent());
+        $req->bindValue(':title', $post->getTitle());
+        $reqExec = $req->execute();
+        
+        return $reqExec;        
+//        return $post->getId();        
+    }
+    
+    
     
 }
