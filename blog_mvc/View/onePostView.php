@@ -8,10 +8,6 @@
 
         <!-- Post Content Column -->
         <div class="col-lg-12">
-
-            <!-- Title -->
-            <!--<h1 class="mt-4"><? // echo htmlspecialchars($post->getTitle()) ?></h1>-->
-
             <!-- Author -->
             <div class="d-flex justify-content-between">
                 <p class="lead">
@@ -20,7 +16,7 @@
                 </p>
                 <?php if(isset($_SESSION['adminConnected'])): ?>
                     <div>
-                        <button type="button" class="btn btn-secondary">Editer</button>
+                        <a href="<?=$this->basePath?>postEdition/<?= ($post->getId())?>" type="button" class="btn btn-secondary">Editer</a>
                         <button type="button" class="btn btn-danger">Supprimer</button>
                     </div>                
                 <?php endif; ?>
@@ -30,13 +26,6 @@
 
             <!-- Date/Time -->
             <p><?= ($post->getCreation_date())?></p>
-
-<!--            <hr>
-
-             Preview Image 
-            <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
-            <hr>-->
 
             <!-- Post Content -->
 

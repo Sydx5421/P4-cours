@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\Manager\PostsManager;
 use App\Model\Manager\CommentsManager;
+use App\Model\Entity\Post;
 
 
 
@@ -91,17 +92,31 @@ class BlogController extends AbstractController
         header("Location: $referer");
     }
     
-    public function postEdition(){
+    public function postEdition($postId=null){
         $postsManager = new PostsManager();
-        
+//        vd('Action post edition');
         $messageFlash;
         $messageType;
         $referer;
         
+        
+        if(isset($postId)){
+            $post = $postsManager->getPost($postId);
+            
+            $title = $post->getTitle();
+            $content = $post->getContent();
+            
+            $messageFlash = 'Vous pouvez éditer puis publier votre article pour enregistrez les modification';
+            $messageType = 'primary';
+            
+            $referer = "postEdition";
+            
+        }
+        
         if($this->isPost()){
             if(!$_POST['contentPost'] || !$_POST['postTitle']){
-                $Title = isset($_POST['postTitle']) ? $_POST['postTitle'] : '';
-                $Content = isset($_POST['contentPost']) ? $_POST['contentPost'] : '';                
+                $title = isset($_POST['postTitle']) ? $_POST['postTitle'] : '';
+                $content = isset($_POST['contentPost']) ? $_POST['contentPost'] : '';                
                 
                 $messageFlash = 'Tous les champs doivent être remplit';
                 $messageType = 'danger';
@@ -132,6 +147,7 @@ class BlogController extends AbstractController
                 }                
             }            
         }
+        
         if(isset($messageFlash) && isset($messageType)){
             $this->addFlash($messageFlash, $messageType);        
         }

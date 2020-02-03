@@ -25,6 +25,8 @@ $router->addRoute(new Route('/connection', 'blog', 'connection'));
 //if(isset($_SESSION['adminConnected']) && $_SESSION['adminConnected'] === true ){
     $router->addRoute(new Route('/deconnection', 'blog', 'deconnection'));
     $router->addRoute(new Route('/postEdition', 'blog', 'postEdition'));    
+    $router->addRoute(new Route('/postEdition/(\d+)', 'blog', 'postEdition'));    
+//    $router->addRoute(new Route('/postEdition?post_id=(\d+)', 'blog', 'postEdition'));    
 //}
 
 
