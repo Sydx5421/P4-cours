@@ -14,7 +14,7 @@
                   by
                   <a href="#">Jean Forteroche</a>
                 </p>
-                <?php if(isset($_SESSION['adminConnected'])): ?>
+                <?php if($this->isAdmin===true): ?>
                     <div>
                         <a href="<?=$this->basePath?>postEdition/<?= ($post->getId())?>" type="button" class="btn btn-secondary">Editer</a>
                         <button type="button" class="btn btn-danger">Supprimer</button>
@@ -68,7 +68,7 @@
                         <?= htmlspecialchars($comment->getComment()) ?>
                     </div>
                     <div>
-                        <?php if(!isset($_SESSION['adminConnected']) || $_SESSION['adminConnected'] === false): ?>
+                        <?php if($this->isAdmin===false): ?>
                             <a class="nwl_signaler" href=""><i class="fas fa-flag"></i></a>
                         <?php else: ?>
                             <a class="nwl_suprimer" href=""><i class="fas fa-trash"></i></a>

@@ -15,9 +15,9 @@
                      <a class="nav-link" href="<?=$this->basePath?>posts">Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=$this->basePath?>connection">Connection</a>
+                    <a class="nav-link" href="<?=$this->basePath?>connection"><?php if($this->isAdmin===true):?>Dashboard<?php else: ?>Connection<?php endif;?></a>
                 </li>
-                <?php if(isset($_SESSION['adminConnected']) && $_SESSION['adminConnected'] === true ): ?>
+                <?php if($this->isAdmin===true): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?=$this->basePath?>postEdition">Edition</a>
                     </li>

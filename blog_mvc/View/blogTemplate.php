@@ -25,6 +25,11 @@
     <!-- Mon Style -->
     <link href="<?=$this->basePath?>Public/myStyles.css" rel="stylesheet" />
     
+    <script 
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        accesskey=""integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        async=""crossorigin="anonymous">
+    </script>
     
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
@@ -58,16 +63,16 @@
     
     <!--Gestion du messge flash-->
     <?php if(isset($_SESSION['message_flash'])){?>
-        <div class="alert <?= $_SESSION['message_flash']['type']; ?>">
+        <div class="alert <?= $_SESSION['message_flash']['type']; ?> alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?= $_SESSION['message_flash']['message']; ?>
         </div>    
     <?php
         unset($_SESSION['message_flash']);
     }?>
     <!------------------- End flash--------------------->
+    <?php var_dump($this->isAdmin); ?>
     
-    <!--<h1 style="color: orange;">Session statut : <?php var_dump(isset($_SESSION['adminConnected'])) ; ?></h1>-->
-
     <!-- Page Content -->
     <main class="col-lg-12">
         <?= $content ?>
@@ -109,6 +114,11 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.slim.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script>
+        $('.alert').alert()
+    </script>
 
 </body>
 
