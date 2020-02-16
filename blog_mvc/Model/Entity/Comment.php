@@ -9,6 +9,9 @@ class Comment
     protected $author;
     protected $comment;
     protected $comment_date;
+    protected $commentRead;
+    protected $reported;
+    protected $checked;
     
     public function isValid(){
         //vérifie que le post_id est bien un nombre 
@@ -36,6 +39,18 @@ class Comment
 //        vd($comment->getComment_date());
         return $this->comment_date;
     }
+    
+    public function getCommentRead() {
+        return $this->commentRead;
+    }
+    
+    public function getReported() {
+        return $this->reported;
+    }
+    
+    public function getChecked() {
+        return $this->checked;
+    }
 
     //***** SETTERS *****
     public function setId($id) {
@@ -61,8 +76,19 @@ class Comment
 //    public function setComment_date(\DateTime $comment_date) {
     public function setComment_date($comment_date) {
         $this->comment_date = $comment_date;
-//        vd($this->comment_date);
         return $this;
+    }
+    
+    public function setCommentRead() {
+        return $this->commentRead;
+    }
+    
+    public function setReported() {
+        return $this->reported;
+    }
+    
+    public function setChecked() {
+        return $this->checked;
     }
 
   

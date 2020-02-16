@@ -11,29 +11,35 @@ class CommentsManager extends Manager
 {
     public function getComments($postId)
     {
-//        vd('ENTER');
         $db = $this->dbConnect(); 
-        $req = $db->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+        $req = $db->prepare('SELECT *, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
 
         $req->execute(array($postId));
         
-//        $comments = array();
-        $comment = $req->fetchObject('App\Model\Entity\Comment');
-//        vd($comment);
         $comments = [];
-        if($comment != false){
-            while($comment = $req->fetchObject('App\Model\Entity\Comment')){
-//                    vd($comment);
-                    $comments[] = $comment;
-                }            
-                
-            $req->closeCursor();
         
-        }
-        
+        while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
+            $comments[] = $comment;
+        }                   
+        $req->closeCursor();
+
         return $comments;
     }
 
+    public function getReportedComments(){
+        $db = $this->dbConnect(); 
+        $req = $db->prepare('SELECT *, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date FROM comments WHERE reported = 1 ORDER BY comment_date DESC');
+
+        $req->execute(array());
+        
+        $comments = [];
+        while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
+            $comments[] = $comment;
+        }                            
+        $req->closeCursor();       
+        return $comments;        
+    }
+    
     public function postComment(Comment $comment)
     {
         
@@ -56,19 +62,42 @@ class CommentsManager extends Manager
         
         $req->execute();
         
-        $comment = $req->fetchObject('App\Model\Entity\Comment');
-        
         $comments = [];
-        if($comment != false){
-            while($comment = $req->fetchObject('App\Model\Entity\Comment')){
-                $comments[] = $comment;
-            }            
-                
-            $req->closeCursor();        
-        }
+        while($comment = $req->fetchObject('App\Model\Entity\Comment')){
+            $comments[] = $comment;
+        }            
+        $req->closeCursor();     
         
         return $comments;
         
+    }
+    
+    public function reportComment($commentId){
+        $db = $this->dbConnect();
+        $req = $db->exec('UPDATE comments SET reported = 1 WHERE id =' . $commentId);
+        
+        return $req;          
+    }
+    
+    public function readComment($commentId){
+        $db = $this->dbConnect();
+        $req = $db->exec('UPDATE comments SET commentRead = 1 WHERE id =' . $commentId);
+                
+        return $req;          
+    }
+    
+    public function checkComment($commentId){
+        $db = $this->dbConnect();
+        $req = $db->exec('UPDATE comments SET checked = 1, reported = 0 WHERE id =' . $commentId);
+        
+        return $req;          
+    }
+    
+    public function deleteComment($commentId){
+        $db = $this->dbConnect();
+        $req = $db->exec('DELETE FROM comments WHERE id =' . $commentId);
+        
+        return $req;  
     }
     
 }

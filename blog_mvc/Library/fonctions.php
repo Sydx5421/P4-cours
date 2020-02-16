@@ -13,3 +13,11 @@ function vd($args)
     echo '</pre></body></html>';
     die;
 }
+
+
+function extrait($string, $start, $length)
+{
+    $extrait = substr($string, $start, $length) . '[...]';
+    
+    return $extrait;
+}

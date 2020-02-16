@@ -4,9 +4,17 @@ namespace App\Model\Manager;
 
 class Manager
 {
+    
     protected function dbConnect()
     {
-        $db = new \PDO('mysql:host=localhost;dbname=blog_cours;charset=utf8', 'root', '');
+        $yaml = yaml_parse_file('./Config/parameters.yml');
+
+        $host = $yaml["database"]["host"];
+        $dbname = $yaml["database"]["dbname"];
+        $username = $yaml["database"]["username"];
+        $password = $yaml["database"]["password"];
+        
+        $db = new \PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $username, $password);
         return $db;
     }
 }

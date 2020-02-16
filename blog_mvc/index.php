@@ -20,12 +20,15 @@ $router->addRoute(new Route('/posts', 'blog', 'posts'));
 //$router->addRoute(new Route('/post', 'blog', 'onePost'));
 $router->addRoute(new Route('/post/(\d+)', 'blog', 'onePost'));
 $router->addRoute(new Route('/connection', 'blog', 'connection'));
+$router->addRoute(new Route('/reportComment', 'blog', 'reportComment'));
 
 //pages réserver à l'admin
 //if($this->isAdmin === true){
     $router->addRoute(new Route('/deconnection', 'admin', 'deconnection'));
     $router->addRoute(new Route('/postEdition', 'admin', 'postEdition'));    
     $router->addRoute(new Route('/postEdition/(\d+)', 'admin', 'postEdition'));    
+    $router->addRoute(new Route('/adminActionComment', 'admin', 'adminActionComment'));    
+//    $router->addRoute(new Route('/commentAction', 'admin', 'commentAction'));    
 //    $router->addRoute(new Route('/postEdition?post_id=(\d+)', 'blog', 'postEdition'));    
 //}
 

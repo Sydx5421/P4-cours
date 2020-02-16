@@ -13,12 +13,9 @@ class PostsManager extends Manager
     {
 //        vd('ENTER');
         $db = $this->dbConnect(); 
-//        $posts = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
 
-//        return $posts;
-        
         // Version fetchObject :
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts ORDER BY creation_date DESC');
+        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts p ORDER BY p.creation_date DESC');
         
         $posts = array();
         
@@ -27,7 +24,7 @@ class PostsManager extends Manager
         }
 
         $req->closeCursor();
-
+        
         return $posts;               
     }
 
@@ -78,10 +75,7 @@ class PostsManager extends Manager
         $req->bindValue(':title', $post->getTitle());
         $reqExec = $req->execute();
         
-        return $reqExec;        
-//        return $post->getId();        
+        return $reqExec;             
     }
-    
-    
     
 }

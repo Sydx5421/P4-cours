@@ -24,13 +24,40 @@ class AdminController extends AbstractController
         }
     }
 
-    public function redirectIfNotCOnnected(){
+    protected function redirectIfNotCOnnected(){
         $this->addFlash("Ces pages sont réservées à l'administrateur ", "danger");
-        require 'View/404View.php'; 
-        exit();
+        require 'View/404View.php'; //virer
+        exit();//virer
+        // faire une redirection
     }
     
-    public function deconnection(){
+    public function adminActionComment(){
+        // Gestion des actions sur les commentaires en Ajax
+        $commentsManager = new CommentsManager();
+        if($this->isPost()){     
+            // vérifié si on est en mode ajax :
+            if(isset($_POST['commentAction']) && isset($_POST['id'])){
+                if($_POST['commentAction'] == 'read'){
+//                    vd('Fonction READ !');
+                    $response = new \stdClass();
+                    $response->result = $commentsManager->readComment($_POST['id']);
+                    echo json_encode($response);
+                }elseif($_POST['commentAction'] == 'checked'){
+                    $response = new \stdClass();
+                    $response->result = $commentsManager->checkComment($_POST['id']);
+                    echo json_encode($response);
+//                    die;
+                }elseif($_POST['commentAction'] == 'delete'){
+                    $response = new \stdClass();
+                    $response->result = $commentsManager->deleteComment($_POST['id']);
+                    echo json_encode($response);
+//                    die;
+                }
+            }
+        }
+    }
+
+        public function deconnection(){
         session_destroy();
         session_start();// On redémarre une session anonyme pour pouvoir afficher le message de déconnexion
         $this->addFlash('Deconnexion ', 'danger');

@@ -13,7 +13,7 @@
                     <h2><?= htmlspecialchars($post->getTitle()) ?></h2>
                     <p>Publié le <?= ($post->getCreation_date())?></p>
                     <div class="text-justify">
-                        <?= nl2br($post->getContent()) ?>
+                        <?= extrait($post->getContent(),0, 200) ?>
                     </div>
                     <a href="post/<?= ($post->getId())?>" title="Lire la suite de l'article" class="btn btn-secondary  mt-4 mb-2" role="button">Lire la suite</a>
                     <hr>
