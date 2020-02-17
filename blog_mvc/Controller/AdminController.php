@@ -32,30 +32,20 @@ class AdminController extends AbstractController
     }
     
     public function dashboard(){
-                
-        // traitement du formulaire de gestion des commentaires
-        if(isset($_POST['actionSignalement_(\d+)'])){            
-            //Prise en compte du traitement des commentaires signalés
+        if($this->isPost()){    
             $commentsManager = new CommentsManager();
-            $comments = $commentsManager->getReportedComments();
-
-            foreach($comments as $comment){
-                if($_POST['actionSignalement_' . $comment->getId()] === 'checked'){
-                    // le commentaire est valider ->x mettre le champ checked à 1
-                    $commentsManager->checkComment($comment->getId());
-
-                }elseif($_POST['actionSignalement_' . $comment->getId()] === 'unprocessed'){
-                    // le commentaire n'a pas été traité par l'auteur, il reste donc signalé -> laisser le champ reported à 1
-                    $commentsManager->reportComment($comment->getId());
-                }elseif($_POST['actionSignalement_' . $comment->getId()] === 'delete'){
-                    // le commentaire est supprimé -> appeler la fonction de suppression sur ce commentaire
-                    $commentsManager->deleteComment($comment->getId());
+            foreach ($_POST as $key => $value){
+                if(preg_match('#^actionSignalement_(\d+)$#', $key, $matches) === 1){
+                    if($value === 'checked'){
+                        $commentsManager->checkComment($matches[1]);
+                    }elseif($value === 'delete'){
+                    $commentsManager->deleteComment($matches[1]);
+                    }
                 }
-            }                
+            }
         }
         
         $postsManager = new PostsManager();
-//        $post = $postsManager->getPost($postId) ;
         $commentsManager = new CommentsManager();
         $comments = $commentsManager->getReportedComments();
         

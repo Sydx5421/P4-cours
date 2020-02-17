@@ -14,10 +14,14 @@
                 <li class="nav-item">
                      <a class="nav-link" href="<?=$this->basePath?>posts">Articles</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?=$this->basePath?>connection"><?php if($this->isAdmin===true):?>Dashboard<?php else: ?>Connection<?php endif;?></a>
-                </li>
-                <?php if($this->isAdmin===true): ?>
+                <?php if($this->isAdmin===false):?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=$this->basePath?>connection">Connection</a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=$this->basePath?>dashboard">Dashboard</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?=$this->basePath?>postEdition">Edition</a>
                     </li>

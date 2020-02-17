@@ -177,6 +177,9 @@ article{
 .dashboard h4{
     margin-top: 3rem;
 }
+.dashboard form{
+    width: 100%;
+}
 .dashboard table tbody{
     display: block;
     max-height: 300px;

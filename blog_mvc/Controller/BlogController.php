@@ -12,11 +12,6 @@ use App\Model\Entity\Post;
 class BlogController extends AbstractController
 {    
 
-    
-//    public function commentAction(){
-//
-//    }
-
     public function reportComment(){
         // Gestion des actions sur les commentaires en Ajax
         $commentsManager = new CommentsManager();
@@ -30,14 +25,9 @@ class BlogController extends AbstractController
                 }
             }
         }
-        //------
     }
     
     public function home(){
-        
-
-                
-        //-------
         $postsManager = new PostsManager();
         $lastPost = $postsManager->getLastPost();
         require 'View/home.php';   
@@ -90,24 +80,12 @@ class BlogController extends AbstractController
             }
         }        
         $comments = $commentsManager->getComments($postId);
-//        vd($comments);
-        
         require 'View/onePostView.php';
     }
     
     
     public function connection(){
-//        $adminConnected = false;
-        
-        if($this->isPost()){
-//            vd($_POST);
-//            foreach ($_POST as $key => $value){
-//                if(preg_match('#^actionSignalement_(\d+)$#', $key, $matches) === 1){
-//                    vd($matches[1]);// id de mon commentaire 
-//                    // $value contient la valeur que je doit processer  ! 
-//                }
-//            }
-            
+        if($this->isPost()){            
             if(isset($_POST['admin']) && isset($_POST['mdp'])){
                 $yaml = yaml_parse_file('./Config/parameters.yml');
 

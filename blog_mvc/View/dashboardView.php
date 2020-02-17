@@ -10,7 +10,7 @@
     <h5>Commentaires signalés</h5>
     <div>
         <div class="media mb-4">  
-            <form action="" method="post">
+            <form action="<?=$this->basePath?>dashboard" method="post">
                 <table class="table">
                     <thead class="">
                         <tr class="d-flex">
@@ -20,6 +20,13 @@
                         </tr>
                     </thead>
                     <tbody class="">
+                        <?php if($comments == null):?>
+                        <tr class="d-flex">
+                            <td class="col-12 text-center">
+                                <h5 class="mt-0">Vous n'avez aucun commentaires signalés</h5>
+                            </td>
+                        </tr>
+                        <?php endif ; ?>
                         <?php foreach ($comments as $comment):?>
                             <tr class="d-flex">
                                 <td class="col-7 text-left">
