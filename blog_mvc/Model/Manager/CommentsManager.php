@@ -40,6 +40,39 @@ class CommentsManager extends Manager
         return $comments;        
     }
     
+    public function getNewComments(){
+        $db = $this->dbConnect(); 
+        $req = $db->prepare('SELECT *, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date FROM comments WHERE commentRead = 0 ORDER BY comment_date DESC');
+
+        $req->execute(array());
+        
+        $comments = [];
+        while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
+            $comments[] = $comment;
+        }                            
+        $req->closeCursor();       
+        return $comments;        
+    }
+    
+    public function getReportedCommentsNb(){
+        $db = $this->dbConnect(); 
+        $req = $db->query('SELECT COUNT(reported) as reportedCommentsNb FROM comments WHERE reported = 1');
+        $result = $req->fetch();
+        $req->closeCursor();       
+        
+        return $result['reportedCommentsNb'];
+    }
+    
+    public function getNewCommentsNb(){
+        $db = $this->dbConnect(); 
+        $req = $db->query('SELECT COUNT(commentRead) as newCommentsNb FROM comments WHERE commentRead = 0');
+        $result = $req->fetch();
+        $req->closeCursor();       
+        
+        return $result['newCommentsNb'];
+    }
+
+
     public function postComment(Comment $comment)
     {
         

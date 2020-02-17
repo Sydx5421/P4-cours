@@ -41,13 +41,24 @@ class AdminController extends AbstractController
                     }elseif($value === 'delete'){
                     $commentsManager->deleteComment($matches[1]);
                     }
+                }elseif(preg_match('#^actionNewComment_(\d+)$#', $key, $matches) === 1){
+                    if($value === 'commentRead'){
+                        $commentsManager->readComment($matches[1]);
+                    }elseif($value === 'delete'){
+                    $commentsManager->deleteComment($matches[1]);
+                    }
                 }
             }
         }
         
         $postsManager = new PostsManager();
         $commentsManager = new CommentsManager();
-        $comments = $commentsManager->getReportedComments();
+        $reportedComments = $commentsManager->getReportedComments();
+        
+        $newComments = $commentsManager->getNewComments();
+        $newCommentsNb = $commentsManager->getNewCommentsNb();
+        $reportedCommentsNb = $commentsManager->getReportedCommentsNb();
+        
         
         require 'View/dashboardView.php'; 
     }
