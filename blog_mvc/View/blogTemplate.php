@@ -71,7 +71,7 @@
         unset($_SESSION['message_flash']);
     }?>
     <!------------------- End flash--------------------->
-    <?php var_dump($this->isAdmin); ?>
+    <?php // var_dump('isAdmin == ',$this->isAdmin); ?>
     
     <!-- Page Content -->
     <main class="col-lg-12">

@@ -62,7 +62,7 @@ class BlogController extends AbstractController
      
             // vérifié si on est en mode ajax :
             if(isset($_POST['commentAction']) && isset($_POST['id'])){
-//                    $referer = $this->basePath . "posts";
+//                    $dferer = $this->basePath . "posts";
 //                    header("Location: $referer");
                 if($_POST['commentAction'] == 'reported'){
                     $response = new \stdClass();
@@ -119,36 +119,13 @@ class BlogController extends AbstractController
                     $this->isAdmin = true;   
                     $this->addFlash('Bienvenue ', 'success');
                     // Faire un redirec vers une page Dashboard que j'aurait créer !
+                    $referer = $this->basePath . "dashboard";
+                    header("Location: $referer");
                 }else{
                     $this->addFlash('Erreur, le mot de passe et/ou le login sont incorrectes', 'danger');
                 }
-            }elseif(isset($_POST['actionSignalement_(\d+)'])){            
-                //Prise en compte du traitement des commentaires signalés
-                $commentsManager = new CommentsManager();
-                $comments = $commentsManager->getReportedComments();
-
-                foreach($comments as $comment){
-                    if($_POST['actionSignalement_' . $comment->getId()] === 'checked'){
-                        // le commentaire est valider ->x mettre le champ checked à 1
-                        $commentsManager->checkComment($comment->getId());
-
-                    }elseif($_POST['actionSignalement_' . $comment->getId()] === 'unprocessed'){
-                        // le commentaire n'a pas été traité par l'auteur, il reste donc signalé -> laisser le champ reported à 1
-                        $commentsManager->reportComment($comment->getId());
-                    }elseif($_POST['actionSignalement_' . $comment->getId()] === 'delete'){
-                        // le commentaire est supprimé -> appeler la fonction de suppression sur ce commentaire
-                        $commentsManager->deleteComment($comment->getId());
-                    }
-                }                
             }
-            
-        }
-        
-        $postsManager = new PostsManager();
-//        $post = $postsManager->getPost($postId) ;
-        $commentsManager = new CommentsManager();
-        $comments = $commentsManager->getReportedComments();
-                        
+        }      
         require 'View/connexionView.php';   
     }
     

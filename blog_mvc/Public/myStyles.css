@@ -45,6 +45,9 @@ h3 + hr{
     color: #a81313;
 }
 
+form{
+    margin: 3rem auto;
+}
 
 /*----------- GENERAL ----------*/
 
@@ -57,7 +60,8 @@ h3 + hr{
 
 /************ HEADER ************/
 .onePostVIew header,
-.connexion_dashboard header,
+.dashboard header,
+.connexion header,
 .insideBlog header{
     height: 20vh;
 }
@@ -169,14 +173,11 @@ article{
 /********** INSCRIPTION *********/
 /*------------------------------*/
 
-/********** CONNECTION **********/
-form{
-    margin: 3rem auto;
+/********** DASHBOARD **********/
+.dashboard h4{
+    margin-top: 3rem;
 }
-.connexion_dashboard table{
-    
-}
-.connexion_dashboard table tbody{
+.dashboard table tbody{
     display: block;
     max-height: 300px;
     overflow-y: scroll;    
@@ -194,7 +195,7 @@ form{
 table  { border-collapse: collapse; width: 100%; }
 th, td { padding: 8px 16px; }
 th     { background:#eee; }
-.connexion_dashboard table tbody td{
+.dashboard table tbody td{
     width: 100%;
 }
 /*table thead {

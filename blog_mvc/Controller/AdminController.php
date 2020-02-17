@@ -31,6 +31,38 @@ class AdminController extends AbstractController
         // faire une redirection
     }
     
+    public function dashboard(){
+                
+        // traitement du formulaire de gestion des commentaires
+        if(isset($_POST['actionSignalement_(\d+)'])){            
+            //Prise en compte du traitement des commentaires signalés
+            $commentsManager = new CommentsManager();
+            $comments = $commentsManager->getReportedComments();
+
+            foreach($comments as $comment){
+                if($_POST['actionSignalement_' . $comment->getId()] === 'checked'){
+                    // le commentaire est valider ->x mettre le champ checked à 1
+                    $commentsManager->checkComment($comment->getId());
+
+                }elseif($_POST['actionSignalement_' . $comment->getId()] === 'unprocessed'){
+                    // le commentaire n'a pas été traité par l'auteur, il reste donc signalé -> laisser le champ reported à 1
+                    $commentsManager->reportComment($comment->getId());
+                }elseif($_POST['actionSignalement_' . $comment->getId()] === 'delete'){
+                    // le commentaire est supprimé -> appeler la fonction de suppression sur ce commentaire
+                    $commentsManager->deleteComment($comment->getId());
+                }
+            }                
+        }
+        
+        $postsManager = new PostsManager();
+//        $post = $postsManager->getPost($postId) ;
+        $commentsManager = new CommentsManager();
+        $comments = $commentsManager->getReportedComments();
+        
+        require 'View/dashboardView.php'; 
+    }
+
+
     public function adminActionComment(){
         // Gestion des actions sur les commentaires en Ajax
         $commentsManager = new CommentsManager();

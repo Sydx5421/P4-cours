@@ -24,6 +24,7 @@ $router->addRoute(new Route('/reportComment', 'blog', 'reportComment'));
 
 //pages réserver à l'admin
 //if($this->isAdmin === true){
+    $router->addRoute(new Route('/dashboard', 'admin', 'dashboard'));
     $router->addRoute(new Route('/deconnection', 'admin', 'deconnection'));
     $router->addRoute(new Route('/postEdition', 'admin', 'postEdition'));    
     $router->addRoute(new Route('/postEdition/(\d+)', 'admin', 'postEdition'));    
