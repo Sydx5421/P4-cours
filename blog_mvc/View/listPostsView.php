@@ -21,8 +21,41 @@
                 <?php endforeach; ?>
             </div>
         </div>	
-            <a href="home" title="retour à l'accueil" class="btn btn-secondary  mt-4 mb-2" role="button">retour à l'accueil</a>
     </div>
+    
+    <!-- Pagination -->
+    
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <?php if($currentPage-2 > 0): ?> 
+                <li class="page-item">
+                    <a class="page-link" href="<?=$this->basePath?>posts/<?= $currentPage-2?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+            <?php endif;?>
+            <?php if($currentPage-1 > 0): ?>  
+                <li class="page-item"><a class="page-link" href="<?=$this->basePath?>posts/<?= $currentPage-1?>"><?= $currentPage-1?></a></li>
+            <?php endif;?>    
+                <li class="page-item"><a class="page-link" href="<?=$this->basePath?>posts/<?= $currentPage?>"><?= $currentPage?></a></li>
+            <?php if($currentPage+1 <= $nbPages): ?>
+                <li class="page-item"><a class="page-link" href="<?=$this->basePath?>posts/<?= $currentPage+1?>"><?= $currentPage+1?></a></li>
+            <?php endif;?>
+            <?php if($currentPage+2 <= $nbPages): ?>
+                <li class="page-item">
+                    <a class="page-link" href="<?=$this->basePath?>posts/<?= $currentPage+2?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            <?php endif;?>
+        </ul>
+    </nav>
+    <div class="justify-content-center">
+        <a href="home" title="retour à l'accueil" class="btn btn-secondary  mt-4 mb-2" role="button">retour à l'accueil</a>
+    </div>
+        
 </section>
 
 <?php $content = ob_get_clean();?>

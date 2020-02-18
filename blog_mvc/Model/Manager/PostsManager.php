@@ -9,13 +9,25 @@ require_once('Manager.php');
 
 class PostsManager extends Manager
 {
-    public function getPosts()
+    public function getPosts($currentPage=1)
     {
-//        vd('ENTER');
         $db = $this->dbConnect(); 
-
+        
+        $reqNbPosts = $db->query('SELECT COUNT(id) as nbPosts FROM posts');
+        $resultNbPosts = $reqNbPosts->fetch();
+        
+        $nbPosts = $resultNbPosts['nbPosts'];
+        $nbPostsPerPage = 3;
+        $nbPages = ceil($nbPosts/$nbPostsPerPage);
+        
+        if(isset($currentPage) && $currentPage > 0 && $currentPage < $nbPages){
+            $currentPage = $currentPage;
+        }else{
+            $currentPage = 1;
+        }
+                
         // Version fetchObject :
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts p ORDER BY p.creation_date DESC');
+        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts p ORDER BY p.creation_date DESC LIMIT ' . (($currentPage-1)*$nbPostsPerPage) .',3');
         
         $posts = array();
         
@@ -25,7 +37,13 @@ class PostsManager extends Manager
 
         $req->closeCursor();
         
-        return $posts;               
+        $returnVars = array(
+            "posts" => $posts,
+            "nbPages" => $nbPages,            
+            "currentPage" => $currentPage            
+        );
+        
+        return $returnVars;               
     }
 
     public function getPost($postId=1)

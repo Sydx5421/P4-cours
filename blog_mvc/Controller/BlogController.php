@@ -33,9 +33,13 @@ class BlogController extends AbstractController
         require 'View/home.php';   
     }
     
-    public function posts(){
+    public function posts($currentPage=1){
         $postsManager = new PostsManager();
-        $posts = $postsManager->getPosts();
+        $returnVars = $postsManager->getPosts($currentPage);
+        
+        $posts = $returnVars["posts"];
+        $nbPages = $returnVars["nbPages"];
+        $currentPage = $returnVars["currentPage"];
         
         require 'View/listPostsView.php';
     }
@@ -48,8 +52,7 @@ class BlogController extends AbstractController
         
         $post = $postsManager->getPost($postId);
         
-        if($this->isPost()){
-     
+        if($this->isPost()){     
             // vérifié si on est en mode ajax :
             if(isset($_POST['commentAction']) && isset($_POST['id'])){
 //                    $dferer = $this->basePath . "posts";
@@ -85,13 +88,6 @@ class BlogController extends AbstractController
     
     
     public function connexion(){
-//        session_start();
-//                vd($_GET);
-//        if($this->isGet()){
-//            if(isset($_GET['redirect']) && $_GET['redirect'] == 1){
-//                $this->addFlash("Ces pages sont réservées à l'administrateur, veuillez vous connecter.", "danger");
-//            }
-//        }
         if($this->isPost()){            
             if(isset($_POST['admin']) && isset($_POST['mdp'])){
                 $yaml = yaml_parse_file('./Config/parameters.yml');

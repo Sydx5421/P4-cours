@@ -17,6 +17,7 @@ $router = new RouterPOO();
 $router->addRoute(new Route('/home', 'blog', 'home'));
 $router->addRoute(new Route('/', 'blog', 'home'));
 $router->addRoute(new Route('/posts', 'blog', 'posts'));
+$router->addRoute(new Route('/posts/(\d+)', 'blog', 'posts'));
 //$router->addRoute(new Route('/post', 'blog', 'onePost'));
 $router->addRoute(new Route('/post/(\d+)', 'blog', 'onePost'));
 $router->addRoute(new Route('/connexion', 'blog', 'connexion'));
