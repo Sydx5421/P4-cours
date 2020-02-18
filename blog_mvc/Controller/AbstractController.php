@@ -25,10 +25,11 @@ abstract class AbstractController
     }
     
     
-    protected function addFlash($message, $type = 'info'){
+    protected function addFlash($message, $type = 'info', $redirect = false){
         $_SESSION["message_flash"] = [
            'message' => $message,
-            'type' => 'alert-' . $type//(permet d'exploité direct l'info comme class bootstrap
+           'type' => 'alert-' . $type, //(permet d'exploité direct l'info comme class bootstrap
+           'redirect' => $redirect
         ];
         
     }

@@ -16,7 +16,7 @@
                 </li>
                 <?php if($this->isAdmin===false):?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?=$this->basePath?>connection">Connexion</a>
+                        <a class="nav-link" href="<?=$this->basePath?>connexion">Connexion</a>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
@@ -26,7 +26,7 @@
                         <a class="nav-link" href="<?=$this->basePath?>postEdition">Edition</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?=$this->basePath?>deconnection">Déconnection</a>
+                        <a class="nav-link" href="<?=$this->basePath?>deconnexion">Déconnexion</a>
                     </li>
                 <?php endif; ?>
             </ul>

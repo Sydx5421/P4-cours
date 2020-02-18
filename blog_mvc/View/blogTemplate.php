@@ -61,14 +61,16 @@
     <hr class="sub_header"/> 
 
     
-    <!--Gestion du messge flash-->
+    <!-- *********Gestion du message flash ***********-->
     <?php if(isset($_SESSION['message_flash'])){?>
         <div class="alert <?= $_SESSION['message_flash']['type']; ?> alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?= $_SESSION['message_flash']['message']; ?>
         </div>    
     <?php
-        unset($_SESSION['message_flash']);
+        if($_SESSION['message_flash']['redirect'] === false){
+            unset($_SESSION['message_flash']);
+        }
     }?>
     <!------------------- End flash--------------------->
     <?php // var_dump('isAdmin == ',$this->isAdmin); ?>
@@ -92,20 +94,26 @@
                     <li>
                          <a href="<?=$this->basePath?>posts">Articles</a>
                     </li>
-                    <li>
-                        <a href="<?=$this->basePath?>connection">Connection</a>
-                    </li>
                 </ul>
             </div>
             <div>
                 <p>administration</p>
                 <ul>
-                    <li>
-                        <a href="<?=$this->basePath?>postEdition">Edition</a>
+                    <?php if($this->isAdmin===false):?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=$this->basePath?>connexion">Connexion</a>
                     </li>
-                    <li>
-                        <a href="<?=$this->basePath?>deconnection">Déconnection</a>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=$this->basePath?>dashboard">Dashboard</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=$this->basePath?>postEdition">Edition</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=$this->basePath?>deconnexion">Déconnexion</a>
+                    </li>
+                <?php endif; ?>
                 </ul>
             </div>
         </div>

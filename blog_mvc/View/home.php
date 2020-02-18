@@ -54,7 +54,7 @@
         </p>
         <p>Bonne lecture et au plaisir de vous lire ! ;)</p>
         
-        <a href="post/<?= ($lastPost->getId())?>" title="liste de tous les chapitres publiés" class="btn btn-secondary  mt-4 mb-2" role="button">Commencer la lecture</a>
+        <a href="<?=$this->basePath?>posts" title="liste de tous les chapitres publiés" class="btn btn-secondary  mt-4 mb-2" role="button">Commencer la lecture</a>
         
     </section>
 </div>

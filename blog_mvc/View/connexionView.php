@@ -1,6 +1,7 @@
 <?php $titleVue = "Connectez-vous"; ?>
 <?php $pageClass = "connexion"?>
 <?php ob_start(); ?>
+
 <div class="card-body text-center">
 <form action="" method="post" class="col-md-8 col-lg-6 text-center">
     <div class="input-group form-group">
@@ -23,3 +24,11 @@
 </div>
 <?php $content = ob_get_clean();?>
 <?php require('blogTemplate.php') ?>
+
+<!--Gestion du message flash-->
+<?php if(isset($_SESSION['message_flash'])){
+    if($_SESSION['message_flash']['redirect'] === true){
+        unset($_SESSION['message_flash']);
+    }
+}?>
+<!------------- End flash---->

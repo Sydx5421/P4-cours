@@ -16,19 +16,16 @@ class AdminController extends AbstractController
 //        vd($_SESSION['adminConnected'], $this->isAdmin);
         
         if($this->isAdmin === false){
-            // Vous n'avez rien à faire là ! 
-////            echo("Vous n'avez rien à faire là ! ");
-//            $this->addFlash("Ces pages sont réservées à l'administrateur ", "danger");
-//            require 'View/connexionView.php'; 
             $this->redirectIfNotCOnnected();
         }
     }
 
     protected function redirectIfNotCOnnected(){
-        $this->addFlash("Ces pages sont réservées à l'administrateur ", "danger");
-        require 'View/404View.php'; //virer
-        exit();//virer
-        // faire une redirection
+        session_start();
+        $this->addFlash("Ces pages sont réservées à l'administrateur, veuillez vous connecter.", "danger", true);
+        $referer = $this->basePath . "connexion";
+        header("Location: $referer");
+                
     }
     
     public function dashboard(){
@@ -90,7 +87,7 @@ class AdminController extends AbstractController
         }
     }
 
-        public function deconnection(){
+        public function deconnexion(){
         session_destroy();
         session_start();// On redémarre une session anonyme pour pouvoir afficher le message de déconnexion
         $this->addFlash('Deconnexion ', 'danger');

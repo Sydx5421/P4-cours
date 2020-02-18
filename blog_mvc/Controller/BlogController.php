@@ -84,7 +84,14 @@ class BlogController extends AbstractController
     }
     
     
-    public function connection(){
+    public function connexion(){
+//        session_start();
+//                vd($_GET);
+//        if($this->isGet()){
+//            if(isset($_GET['redirect']) && $_GET['redirect'] == 1){
+//                $this->addFlash("Ces pages sont réservées à l'administrateur, veuillez vous connecter.", "danger");
+//            }
+//        }
         if($this->isPost()){            
             if(isset($_POST['admin']) && isset($_POST['mdp'])){
                 $yaml = yaml_parse_file('./Config/parameters.yml');
