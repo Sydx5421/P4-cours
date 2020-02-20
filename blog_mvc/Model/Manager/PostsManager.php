@@ -20,7 +20,7 @@ class PostsManager extends Manager
         $nbPostsPerPage = 3;
         $nbPages = ceil($nbPosts/$nbPostsPerPage);
         
-        if(isset($currentPage) && $currentPage > 0 && $currentPage < $nbPages){
+        if(isset($currentPage) && $currentPage > 0 && $currentPage <= $nbPages){
             $currentPage = $currentPage;
         }else{
             $currentPage = 1;
@@ -94,6 +94,13 @@ class PostsManager extends Manager
         $reqExec = $req->execute();
         
         return $reqExec;             
+    }
+    
+    public function deletePost ($postId){
+        $db = $this->dbConnect(); 
+        $req = $db->exec('DELETE FROM posts WHERE id =' . $postId);
+        
+        return $req;        
     }
     
 }

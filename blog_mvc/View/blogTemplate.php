@@ -61,17 +61,24 @@
     <hr class="sub_header"/> 
 
     
-    <!-- *********Gestion du message flash ***********-->
-    <?php if(isset($_SESSION['message_flash'])){?>
+    <!-- *********Gestion du message flash ***********-->    
+    <?php // var_dump($_SESSION['message_flash']); ?>
+    
+    <?php if(isset($_SESSION['message_flash']) && isset($_SESSION['message_flash']['seen']) && $_SESSION['message_flash']['seen'] === true){
+        unset($_SESSION['message_flash']);
+    }elseif(isset($_SESSION['message_flash'])){ ?>
         <div class="alert <?= $_SESSION['message_flash']['type']; ?> alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?= $_SESSION['message_flash']['message']; ?>
-        </div>    
-    <?php
-        if($_SESSION['message_flash']['redirect'] === false){
-            unset($_SESSION['message_flash']);
-        }
-    }?>
+        </div> 
+        <?php if($_SESSION['message_flash']['redirect'] === false){
+                unset($_SESSION['message_flash']);
+            }else{
+                $_SESSION['message_flash']['seen'] = true;
+            }
+        ?>    
+    <?php }?>
+    
     <!------------------- End flash--------------------->
     <?php // var_dump('isAdmin == ',$this->isAdmin); ?>
     

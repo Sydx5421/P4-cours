@@ -17,7 +17,7 @@
                 <?php if($this->isAdmin===true): ?>
                     <div>
                         <a href="<?=$this->basePath?>postEdition/<?= ($post->getId())?>" type="button" class="btn btn-secondary">Editer</a>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
+                        <a href="<?=$this->basePath?>deletePost/<?= ($post->getId())?>" type="button" onclick="return confirm('Êtes-vous sur de vouloir supprimer cet article ?')" class="btn btn-danger">Supprimer</a>
                     </div>                
                 <?php endif; ?>
             </div>
@@ -146,7 +146,7 @@
 //            reportComment(this.getAttribute("data-id"));
         });
     }
-    
+        
     function reportComment(commentId){ // action utilisateur
         var xhr = new XMLHttpRequest();
         let formData = new FormData(); //objet permettant de transmettre des données en POST

@@ -21,11 +21,12 @@ class AdminController extends AbstractController
     }
 
     protected function redirectIfNotCOnnected(){
-        session_start();
+//        session_start();
         $this->addFlash("Ces pages sont réservées à l'administrateur, veuillez vous connecter.", "danger", true);
+        var_dump($_SESSION['message_flash']);
         $referer = $this->basePath . "connexion";
-        header("Location: $referer");
-                
+        header("Location: $referer");                
+        var_dump($_SESSION['message_flash']);
     }
     
     public function dashboard(){
@@ -98,7 +99,6 @@ class AdminController extends AbstractController
 
     public function postEdition($postId=null){
         $postsManager = new PostsManager();
-//        vd('Action post edition');
         $messageFlash;
         $messageType;
         $referer;        
@@ -109,11 +109,9 @@ class AdminController extends AbstractController
             $title = $post->getTitle();
             $content = $post->getContent();
             
-            $messageFlash = 'Vous pouvez éditer puis publier votre article pour enregistrez les modification';
-            $messageType = 'primary';
-            
-            $referer = "postEdition";
-            
+            $messageFlash = 'Vous pouvez éditer puis publier votre article pour enregistrez les modifications';
+            $messageType = 'primary';            
+            $referer = "postEdition";            
         }
         
         if($this->isPost()){
@@ -122,7 +120,7 @@ class AdminController extends AbstractController
                 $title = isset($_POST['postTitle']) ? $_POST['postTitle'] : '';
                 $content = isset($_POST['contentPost']) ? $_POST['contentPost'] : '';                
                 
-                $messageFlash = 'Tous les champs doivent être remplit';
+                $messageFlash = 'Tous les champs doivent être remplis';
                 $messageType = 'danger';
                                 
                 $referer = "postEdition";
@@ -132,11 +130,9 @@ class AdminController extends AbstractController
                     $post = $postsManager->getPost($_POST['postId']);
                     $post->setContent($_POST['contentPost']);
                     $post->setTitle($_POST['postTitle']);
-//                    vd($post, $post->getContent(), $post->getId(), $post->getTitle());
-                    // faire mon update ici
-                    // créer la fonciton update post
+                    
                     $updatedPost = $postsManager->updatePost($post);
-//                    vd("On post un formulaire et les var title et content sont bien rempli Et on a un post Id", '$updatedPost', $updatedPost );
+                    
                 }else{
                     $post = new \App\Model\Entity\Post;                
                     $post->setContent($_POST['contentPost']);
@@ -191,4 +187,42 @@ class AdminController extends AbstractController
         }
     }  
     
+    public function deletePost($postId){
+        $postsManager = new PostsManager();
+        $postToDelete = $postsManager->getPost($postId);
+        $messageFlash;
+        $messageType;
+        $referer;
+//        vd($postToDelete, $referer);
+        
+        if(isset($postId)){
+            $postDeleted = $postsManager->deletePost($postId);
+            if($postDeleted == 1){
+//            vd($postDeleted);
+                $messageFlash = 'L\'article intitulé : "' . $postToDelete->getTitle() . '" a bien été supprimé';
+                $messageType = 'success';
+                
+                $referer = $this->basePath . "posts";
+
+                header("Location: $referer");
+                
+            }
+        }
+        
+        //-----
+        if(isset($messageFlash) && isset($messageType)){
+            $this->addFlash($messageFlash, $messageType, true);        
+        }
+//         
+//        if(isset($referer)){
+//            if($referer === "posts"){                
+//                require 'View/listPostsView.php';
+//            }elseif($referer === "postEdition"){
+//                require 'View/newPostView.php';
+//            }            
+//        }else{
+//            require 'View/newPostView.php';
+//        }
+        
+    }
 }

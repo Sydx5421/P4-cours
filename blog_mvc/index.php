@@ -29,6 +29,7 @@ $router->addRoute(new Route('/reportComment', 'blog', 'reportComment'));
     $router->addRoute(new Route('/deconnexion', 'admin', 'deconnexion'));
     $router->addRoute(new Route('/postEdition', 'admin', 'postEdition'));    
     $router->addRoute(new Route('/postEdition/(\d+)', 'admin', 'postEdition'));    
+    $router->addRoute(new Route('/deletePost/(\d+)', 'admin', 'deletePost'));    
     $router->addRoute(new Route('/adminActionComment', 'admin', 'adminActionComment'));    
 //    $router->addRoute(new Route('/commentAction', 'admin', 'commentAction'));    
 //    $router->addRoute(new Route('/postEdition?post_id=(\d+)', 'blog', 'postEdition'));    

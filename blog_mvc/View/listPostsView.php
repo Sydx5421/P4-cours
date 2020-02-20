@@ -15,7 +15,7 @@
                     <div class="text-justify">
                         <?= extrait($post->getContent(),0, 200) ?>
                     </div>
-                    <a href="post/<?= ($post->getId())?>" title="Lire la suite de l'article" class="btn btn-secondary  mt-4 mb-2" role="button">Lire la suite</a>
+                    <a href="<?=$this->basePath?>post/<?= ($post->getId())?>" title="Lire la suite de l'article" class="btn btn-secondary  mt-4 mb-2" role="button">Lire la suite</a>
                     <hr>
                     </article>	
                 <?php endforeach; ?>
@@ -38,7 +38,7 @@
             <?php if($currentPage-1 > 0): ?>  
                 <li class="page-item"><a class="page-link" href="<?=$this->basePath?>posts/<?= $currentPage-1?>"><?= $currentPage-1?></a></li>
             <?php endif;?>    
-                <li class="page-item"><a class="page-link" href="<?=$this->basePath?>posts/<?= $currentPage?>"><?= $currentPage?></a></li>
+                <li class="page-item active"><a class="page-link" href="<?=$this->basePath?>posts/<?= $currentPage?>"><?= $currentPage?></a></li>
             <?php if($currentPage+1 <= $nbPages): ?>
                 <li class="page-item"><a class="page-link" href="<?=$this->basePath?>posts/<?= $currentPage+1?>"><?= $currentPage+1?></a></li>
             <?php endif;?>
