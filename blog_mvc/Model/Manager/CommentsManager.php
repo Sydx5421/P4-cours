@@ -18,12 +18,18 @@ class CommentsManager extends Manager
         
         $comments = [];
         
-        while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
+        if($req !== false){
+            while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
             $comments[] = $comment;
-        }                   
-        $req->closeCursor();
+            }                   
+            $req->closeCursor();
 
-        return $comments;
+            return $comments;
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }         
+        
     }
 
     public function getReportedComments(){
@@ -32,12 +38,17 @@ class CommentsManager extends Manager
 
         $req->execute(array());
         
-        $comments = [];
-        while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
-            $comments[] = $comment;
-        }                            
-        $req->closeCursor();       
-        return $comments;        
+        if($req !== false){        
+            $comments = [];
+            while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
+                $comments[] = $comment;
+            }                            
+            $req->closeCursor();       
+            return $comments;   
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }       
     }
     
     public function getNewComments(){
@@ -46,30 +57,45 @@ class CommentsManager extends Manager
 
         $req->execute(array());
         
-        $comments = [];
-        while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
-            $comments[] = $comment;
-        }                            
-        $req->closeCursor();       
-        return $comments;        
+        if($req !== false){ 
+            $comments = [];
+            while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
+                $comments[] = $comment;
+            }                            
+            $req->closeCursor();       
+            return $comments;  
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }  
     }
     
     public function getReportedCommentsNb(){
         $db = $this->dbConnect(); 
         $req = $db->query('SELECT COUNT(reported) as reportedCommentsNb FROM comments WHERE reported = 1');
-        $result = $req->fetch();
-        $req->closeCursor();       
         
-        return $result['reportedCommentsNb'];
+        if($req !== false){
+            $result = $req->fetch();
+            $req->closeCursor();
+            return $result['reportedCommentsNb'];
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }  
+        
     }
     
     public function getNewCommentsNb(){
         $db = $this->dbConnect(); 
         $req = $db->query('SELECT COUNT(commentRead) as newCommentsNb FROM comments WHERE commentRead = 0');
-        $result = $req->fetch();
-        $req->closeCursor();       
-        
-        return $result['newCommentsNb'];
+        if($req !== false){
+            $result = $req->fetch();
+            $req->closeCursor();
+            return $result['newCommentsNb'];
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }  
     }
 
 
@@ -96,13 +122,16 @@ class CommentsManager extends Manager
         $req->execute();
         
         $comments = [];
-        while($comment = $req->fetchObject('App\Model\Entity\Comment')){
-            $comments[] = $comment;
-        }            
-        $req->closeCursor();     
-        
-        return $comments;
-        
+        if($req !== false){ 
+            while($comment = $req->fetchObject('App\Model\Entity\Comment')){
+                $comments[] = $comment;
+            }            
+            $req->closeCursor();     
+            return $comments;
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }  
     }
     
     public function reportComment($commentId){

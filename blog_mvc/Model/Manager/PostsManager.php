@@ -53,11 +53,14 @@ class PostsManager extends Manager
         
         $req->execute(array($postId));
         
-        $post = $req->fetchObject('App\Model\Entity\Post');
-        
-        $req->closeCursor();
-
-        return $post;
+        if($req !== false){
+            $post = $req->fetchObject('App\Model\Entity\Post');
+            $req->closeCursor();
+            return $post;
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }    
     }
     
     public function getLastPost()
@@ -65,11 +68,14 @@ class PostsManager extends Manager
         $db = $this->dbConnect();
         $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 1');
         
-        $lastPost = $req->fetchObject('App\Model\Entity\Post');
-
-        $req->closeCursor();
-
-        return $lastPost;
+        if($req !== false){
+            $lastPost = $req->fetchObject('App\Model\Entity\Post');
+            $req->closeCursor();
+            return $lastPost;
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }    
     }
     
     public function postPost(Post $post)
