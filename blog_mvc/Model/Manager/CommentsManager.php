@@ -121,7 +121,7 @@ class CommentsManager extends Manager
     
     public function checkComment($commentId){
         $db = $this->dbConnect();
-        $req = $db->exec('UPDATE comments SET checked = 1, reported = 0 WHERE id =' . $commentId);
+        $req = $db->exec('UPDATE comments SET checked = 1, reported = 0, commentRead = 1 WHERE id =' . $commentId);
         
         return $req;          
     }

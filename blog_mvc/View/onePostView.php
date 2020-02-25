@@ -100,21 +100,16 @@
 <script>
     // On récupère tous les button de la page
     var allButtons = document.querySelectorAll('button[class^=btn]');
-    console.log("Found", allButtons.length, "div which class starts with “btn”.");
-    // On abonne chaque bouton à un evt click
     
+    // On abonne chaque bouton à un evt click
     for (var i = 0; i < allButtons.length; i++) {
-//        console.log(allButtons[i]);
         allButtons[i].addEventListener('click', function() {
             if(this.classList.contains("nwl_reportComment")){
-                console.log("click sur un bouton de signalement");
                 if ( confirm( "Êtes-vous sur-e de vouloir supprimer ce message?" ) ) {
                     // Code à éxécuter si le l'utilisateur clique sur "OK"
                     reportComment(this.getAttribute("data-id"));
                     parentElt = this.parentNode;
-    //                flagElt = document.createElement('<div title="Ce commentaire a déjà été signalé et sera modéré par l\'admin"><i class="fas fa-flag"></i></div>');
                     $(parentElt).append('<div title="Ce commentaire a déjà été signalé et sera modéré par l\'admin"><i class="fas fa-flag"></i></div>');
-    //                parentElt.appendChild(flagElt);
                     parentElt.removeChild(this);                    
                 } 
             }else if(this.classList.contains("nwl_read")){                
@@ -125,7 +120,6 @@
                     parentElt.removeChild(this);                    
                 } 
             }else if(this.classList.contains("nwl_check")){
-//                checkComment(this.getAttribute("data-id"));
                 if ( confirm( "Ce message a été signalé par un utilisateur. Êtes-vous sur-e de vouloir valider ce message?" ) ) {
                     // Code à éxécuter si le l'utilisateur clique sur "OK"
                     adminActionComment(this.getAttribute("data-id"), 'checked');
@@ -141,13 +135,10 @@
                     commentEltParent.removeChild(commentElt[0]);                    
                 } 
             }
-            console.clear();
-            console.log("You clicked:", this.getAttribute("data-id"));
-//            reportComment(this.getAttribute("data-id"));
         });
     }
-        
-    function reportComment(commentId){ // action utilisateur
+    // action utilisateur
+    function reportComment(commentId){ 
         var xhr = new XMLHttpRequest();
         let formData = new FormData(); //objet permettant de transmettre des données en POST
         formData.append("commentAction", "reported"); 
@@ -155,14 +146,11 @@
         xhr.open('POST','<?=$this->basePath?>reportComment' );
         xhr.addEventListener('readystatechange', function() { // On gère ici une requête asynchrone
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
-                console.log('le  commentaire d\'id : ' + commentId + ', a bien été signalé');
                 let response = JSON.parse(xhr.response);
-                console.log(response);// l'objet Json
-                console.log(response.result); // renvoie juste l'objet.
             }
         });
 
-        xhr.send(formData); // La requête est prête, on envoie tout !
+        xhr.send(formData);
     }
     
     function adminActionComment(commentId, action){ // actions administrateur
@@ -174,17 +162,14 @@
         xhr.addEventListener('readystatechange', function() { // On gère ici une requête asynchrone
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) { // Si le fichier est chargé sans erreur
                 let response = JSON.parse(xhr.response);
-                console.log(response);// l'objet Json
-                console.log(response.result); // renvoie juste l'objet.
                 if(response.result == 1){
-                    console.log('le  commentaire d\'id : ' + commentId + ', a bien été ' + action);
-                let response = JSON.parse(xhr.response);
+                    let response = JSON.parse(xhr.response);
                 }else if(response.result == 0) {
-                    console.log('le  commentaire d\'id : ' + commentId + ', n\'a PAS été ' + action);
+                    alert('le  commentaire d\'id : ' + commentId + ', n\'a PAS été ' + action);
                 }
             }
         });
-        xhr.send(formData); // La requête est prête, on envoie tout !
+        xhr.send(formData);
     }
     
 </script>

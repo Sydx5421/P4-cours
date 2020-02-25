@@ -54,16 +54,14 @@
 
 <body class="<?=$pageClass?>">
     <!-- Navigation -->
-    <?php require('menuView.php'); ?>
+    <?php require('menuInclude.php'); ?>
     <header>
         <h1 class="text-center"><?= $titleVue ?></h1>
     </header>
     <hr class="sub_header"/> 
 
     
-    <!-- *********Gestion du message flash ***********-->    
-    <?php // var_dump($_SESSION['message_flash']); ?>
-    
+    <!-- *********Gestion du message flash ***********-->        
     <?php if(isset($_SESSION['message_flash']) && isset($_SESSION['message_flash']['seen']) && $_SESSION['message_flash']['seen'] === true){
         unset($_SESSION['message_flash']);
     }elseif(isset($_SESSION['message_flash'])){ ?>
@@ -78,9 +76,6 @@
             }
         ?>    
     <?php }?>
-    
-    <!------------------- End flash--------------------->
-    <?php // var_dump('isAdmin == ',$this->isAdmin); ?>
     
     <!-- Page Content -->
     <main class="col-lg-12">

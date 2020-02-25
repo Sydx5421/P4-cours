@@ -8,6 +8,9 @@ class Post
     protected $content;
     protected $creation_date;
     
+    public function isValid(){
+        return !(empty($this->title) || empty($this->content));
+    }
     
     // ***** GETTERS *****
     public function getId() {
@@ -47,7 +50,5 @@ class Post
         $this->creation_date = $creation_date;
         return $this;
     }
-
-
     
 }

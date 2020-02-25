@@ -38,7 +38,7 @@
                                 </td>
                                 <td class="col-3">
                                     <input type="radio" name="actionSignalement_<?= $comment->getId(); ?>" value="checked">Valider<br>
-                                    <input type="radio" checked="checked" name="actionSignalement_<?= $comment->getId(); ?>" value="unprocessed"> Non traité<br>
+                                    <input type="radio" checked="checked" name="actionSignalement_<?= $comment->getId(); ?>" value="unprocessed">Ne rien faire<br>
                                     <input type="radio" name="actionSignalement_<?= $comment->getId(); ?>" value="delete"> Supprimer 
                                 </td>
                             </tr>
@@ -91,7 +91,7 @@
                                 </td>
                                 <td class="col-3">
                                     <input type="radio" name="actionNewComment_<?= $comment->getId(); ?>" value="commentRead">Lu<br>
-                                    <input type="radio" checked="checked" name="actionNewComment_<?= $comment->getId(); ?>" value="unprocessed"> Non traité<br>
+                                    <input type="radio" checked="checked" name="actionNewComment_<?= $comment->getId(); ?>" value="unprocessed">Ne rien faire<br>
                                     <input type="radio" name="actionNewComment_<?= $comment->getId(); ?>" value="delete"> Supprimer 
                                 </td>
                             </tr>

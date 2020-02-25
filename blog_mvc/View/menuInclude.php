@@ -26,7 +26,7 @@
                         <a class="nav-link" href="<?=$this->basePath?>postEdition">Edition</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?=$this->basePath?>deconnexion">Déconnexion</a>
+                        <a class="nav-link" href="<?=$this->basePath?>deconnexion" onclick="return confirm('Êtes-vous sur de vouloir vous déconnecter ?')">Déconnexion</a>
                     </li>
                 <?php endif; ?>
             </ul>

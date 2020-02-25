@@ -17,50 +17,50 @@ class RouterPOO{
     }
     
     public function getRoute($url){
-    foreach ($this->routes as $route){
-      // Si la route correspond à l'URL
-      if (($varsValues = $route->match($url)) !== false){
-        // Si elle a des variables
-        if ($route->hasVars()){
-          $varsNames = $route->varsNames();
-          $listVars = [];
+        foreach ($this->routes as $route){
+            // Si la route correspond à l'URL
+            if (($varsValues = $route->match($url)) !== false){
+                // Si elle a des variables
+                if ($route->hasVars()){
+                    $varsNames = $route->varsNames();
+                    $listVars = [];
 
-          // On crée un nouveau tableau clé/valeur
-          // (clé = nom de la variable, valeur = sa valeur)
-          foreach ($varsValues as $key => $match){
-            // La première valeur contient entièrement la chaine capturée (voir la doc sur preg_match)
-            if ($key !== 0){
-              $listVars[$varsNames[$key - 1]] = $match;
+                    // On crée un nouveau tableau clé/valeur
+                    foreach ($varsValues as $key => $match){
+                        // La première valeur contient entièrement la chaine capturée (voir la doc sur preg_match)
+                        if ($key !== 0){
+                          $listVars[$varsNames[$key - 1]] = $match;
+                        }
+                    }
+                    // On assigne ce tableau de variables à la route
+                    $route->setVars($listVars);
+                }
+                return $route;
             }
-          }
-
-          // On assigne ce tableau de variables � la route
-          $route->setVars($listVars);
         }
-
-        return $route;
-      }
+        throw new \RuntimeException('Aucune route ne correspond à l\'URL', self::NO_ROUTE);
+     }
+    
+    public function getRoutes() {
+        return $this->routes;
     }
-
-    throw new \RuntimeException('Aucune route ne correspond à l\'URL', self::NO_ROUTE);
-  }
-  
+     
     public function run(){
         // vérifie l'url demandé
-        //Récupère dynamiquement l'URL relative demandée indépendamment du dossier contenant le site (supression des sous dossier du chemin) simplifira notamment la mise en ligne
+        //Récupère dynamiquement l'URL relative demandée indépendamment du dossier contenant le site 
         $contextDocumentRoot = $_SERVER["CONTEXT_DOCUMENT_ROOT"];      
         $rootDir = str_replace('\\', '/', realpath(__DIR__.'/../'));
-        $relativeRootDir = str_replace($contextDocumentRoot, '', $rootDir);      
+        $relativeRootDir = str_replace($contextDocumentRoot, '', $rootDir);   
+        
         // vérifie si une de ces routes match avec l'url
         $urlRequested = str_replace($relativeRootDir, '', $_SERVER['REQUEST_URI']);
-//        vd($contextDocumentRoot, $relativeRootDir);
-//        echo '<pre>';
-//        var_dump($urlRequested);   
-
+        
+        $matches = false;
+        
         foreach($this->routes as $route){
             $matches = $route->match($urlRequested);
             // Si match, appelle le controller et l'action correspondant à la route
-            if ($matches !== false){// !== verif strict par rapport à !=
+            if ($matches !== false){
                 $controllerName = 'App\Controller\\' . ucfirst($route->getController()) . 'Controller';
                 $action = $route->getAction();
                 $controller = new $controllerName();
@@ -69,14 +69,13 @@ class RouterPOO{
                 }else{
                     $controller->$action();    
                 }
-            }            
-        }     
-
-//        vd($_SERVER["CONTEXT_DOCUMENT_ROOT"], 'REQUEST_URI' . $_SERVER['REQUEST_URI'], $this->getRoutes());
+                exit;
+            }  
+        }    
+        if($matches === false){
+            $controller = new \App\Controller\BlogController();
+            $controller->notFound();
+            exit;
+        }
     }
-    
-    public function getRoutes() {
-        return $this->routes;
-    }
-    
 }

@@ -27,10 +27,14 @@ class BlogController extends AbstractController
         }
     }
     
+    public function notFound(){
+        require 'View/404View.php';   
+    }
+    
     public function home(){
         $postsManager = new PostsManager();
         $lastPost = $postsManager->getLastPost();
-        require 'View/home.php';   
+        require 'View/homeView.php';   
     }
     
     public function posts($currentPage=1){
@@ -55,14 +59,10 @@ class BlogController extends AbstractController
         if($this->isPost()){     
             // vérifié si on est en mode ajax :
             if(isset($_POST['commentAction']) && isset($_POST['id'])){
-//                    $dferer = $this->basePath . "posts";
-//                    header("Location: $referer");
                 if($_POST['commentAction'] == 'reported'){
                     $response = new \stdClass();
-//                    $response->result = $commentsManager->reportComment($_POST['id']);
                     $response->result = "on rentre dans l'action home";
                     echo json_encode($response);
-//                    vd($response);
                     die;                
                 }
             }

@@ -21,12 +21,10 @@ class AdminController extends AbstractController
     }
 
     protected function redirectIfNotCOnnected(){
-//        session_start();
         $this->addFlash("Ces pages sont réservées à l'administrateur, veuillez vous connecter.", "danger", true);
-        var_dump($_SESSION['message_flash']);
         $referer = $this->basePath . "connexion";
-        header("Location: $referer");                
-        var_dump($_SESSION['message_flash']);
+        header("Location: $referer");       
+        die;
     }
     
     public function dashboard(){
@@ -205,7 +203,12 @@ class AdminController extends AbstractController
                 $referer = $this->basePath . "posts";
 
                 header("Location: $referer");
+            }else{
+                $messageFlash = 'L\'article intitulé : "' . $postToDelete->getTitle() . '" n\'a pas pu être supprimé';
+                $messageType = 'danger';
                 
+                $referer = $this->basePath . "posts";
+                header("Location: $referer");
             }
         }
         
@@ -213,16 +216,6 @@ class AdminController extends AbstractController
         if(isset($messageFlash) && isset($messageType)){
             $this->addFlash($messageFlash, $messageType, true);        
         }
-//         
-//        if(isset($referer)){
-//            if($referer === "posts"){                
-//                require 'View/listPostsView.php';
-//            }elseif($referer === "postEdition"){
-//                require 'View/newPostView.php';
-//            }            
-//        }else{
-//            require 'View/newPostView.php';
-//        }
         
     }
 }

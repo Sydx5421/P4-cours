@@ -14,8 +14,7 @@ class Comment
     protected $checked;
     
     public function isValid(){
-        //vérifie que le post_id est bien un nombre 
-        //vérifie que l'auteur et le commentaire n'est pas vide
+        return !(empty($this->author) || empty($this->comment) || is_int($this->post_id));
     }
     
     //***** GETTERS *****
@@ -36,7 +35,6 @@ class Comment
     }
 
     public function getComment_date() {
-//        vd($comment->getComment_date());
         return $this->comment_date;
     }
     
@@ -73,7 +71,6 @@ class Comment
         return $this;
     }
 
-//    public function setComment_date(\DateTime $comment_date) {
     public function setComment_date($comment_date) {
         $this->comment_date = $comment_date;
         return $this;
@@ -90,6 +87,5 @@ class Comment
     public function setChecked() {
         return $this->checked;
     }
-
   
 }

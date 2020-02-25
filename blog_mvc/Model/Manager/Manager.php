@@ -2,7 +2,7 @@
 //P4 Brouillon
 namespace App\Model\Manager;
 
-class Manager
+abstract class Manager
 {
     
     protected function dbConnect()

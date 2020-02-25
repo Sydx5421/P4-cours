@@ -1,5 +1,4 @@
 <?php
-//P4 Brouillon
 namespace App\Library;
 
 class Route{
@@ -26,7 +25,6 @@ class Route{
     {
         if (preg_match('`^'.$this->url.'$`', $url, $matches))
         {
-//            vd($matches);
             return $matches;
         }
         else
@@ -55,6 +53,8 @@ class Route{
         return $this->vars;
     }
 
+    // ********** SETTERS ************
+    
     public function setAction($action) {
         $this->action = $action;
         return $this;

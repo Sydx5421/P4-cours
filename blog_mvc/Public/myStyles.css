@@ -60,6 +60,7 @@ form{
 
 /************ HEADER ************/
 .onePostVIew header,
+.notFound header,
 .dashboard header,
 .connexion header,
 .insideBlog header{
@@ -169,6 +170,11 @@ article{
     margin: 1rem auto;
 }
 /*------------------------------*/
+
+/********** Post EDITION ********/
+#contentPost{
+    height: 700px;
+}
 
 /********** INSCRIPTION *********/
 /*------------------------------*/
