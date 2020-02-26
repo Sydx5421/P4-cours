@@ -55,6 +55,7 @@ class PostsManager extends Manager
         
         if($req !== false){
             $post = $req->fetchObject('App\Model\Entity\Post');
+            
             $req->closeCursor();
             return $post;
         }else {

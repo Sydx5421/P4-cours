@@ -14,7 +14,7 @@ class Comment
     protected $checked;
     
     public function isValid(){
-        return !(empty($this->author) || empty($this->comment) || is_int($this->post_id));
+        return !(empty($this->author) || empty($this->comment));
     }
     
     //***** GETTERS *****

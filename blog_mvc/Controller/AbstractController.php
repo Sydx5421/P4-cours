@@ -36,4 +36,8 @@ abstract class AbstractController
         return ($_SERVER['REQUEST_METHOD'] == 'POST');
     }
     
+    public function notFound(){
+        require 'View/404View.php';   
+    }
+    
 }

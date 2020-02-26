@@ -116,15 +116,14 @@ class AdminController extends AbstractController
             
             if(!$_POST['contentPost'] || !$_POST['postTitle']){
                 $title = isset($_POST['postTitle']) ? $_POST['postTitle'] : '';
-                $content = isset($_POST['contentPost']) ? $_POST['contentPost'] : '';                
-                
+                $content = isset($_POST['contentPost']) ? $_POST['contentPost'] : '';                                
                 $messageFlash = 'Tous les champs doivent être remplis';
                 $messageType = 'danger';
                                 
                 $referer = "postEdition";
                 
             }else{
-                if(isset($_POST['postId'])){// UPDATE   
+                if(isset($_POST['postId']) && $_POST['postId'] != null ){// UPDATE   
                     $post = $postsManager->getPost($_POST['postId']);
                     $post->setContent($_POST['contentPost']);
                     $post->setTitle($_POST['postTitle']);

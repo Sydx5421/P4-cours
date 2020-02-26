@@ -46,7 +46,7 @@ class Post
         return $this;
     }
 
-    public function setCreation_date(\DateTime $creation_date) {
+    public function setCreation_date($creation_date) {
         $this->creation_date = $creation_date;
         return $this;
     }

@@ -26,11 +26,7 @@ class BlogController extends AbstractController
             }
         }
     }
-    
-    public function notFound(){
-        require 'View/404View.php';   
-    }
-    
+        
     public function home(){
         $postsManager = new PostsManager();
         $lastPost = $postsManager->getLastPost();
@@ -55,9 +51,8 @@ class BlogController extends AbstractController
         $commentsManager = new CommentsManager();
         
         $post = $postsManager->getPost($postId);
-        
         if($this->isPost()){     
-            // vérifié si on est en mode ajax :
+            // gestion du signalement de commentaire
             if(isset($_POST['commentAction']) && isset($_POST['id'])){
                 if($_POST['commentAction'] == 'reported'){
                     $response = new \stdClass();
@@ -66,22 +61,26 @@ class BlogController extends AbstractController
                     die;                
                 }
             }
-            //------            
+            // gestion de l'ajout des nouveaux commentaires      
             $comment = new \App\Model\Entity\Comment;
             $comment->setAuthor($_POST['author']);
             $comment->setComment($_POST['comment']);
-            $comment->setPostId($postId);
-            $newComment = $commentsManager->postComment($comment);
+            if($comment->isValid()){
+                $comment->setPostId($postId);
+                $newComment = $commentsManager->postComment($comment);
+            }else{
+                $this->addFlash('Veuillez remplir tous les champs', 'danger');
+            }
 
             if ($newComment === false) {
                 die('Impossible d\'ajouter le commentaire !');
-            }
-            else {
+            }else {
                 // On réoriente vers la page du post
                 $referer = $_SERVER['HTTP_REFERER'];
                 header("Location: $referer");
             }
-        }        
+        }
+        
         $comments = $commentsManager->getComments($postId);
         require 'View/onePostView.php';
     }

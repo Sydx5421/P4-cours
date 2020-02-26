@@ -1,4 +1,4 @@
-<?php $titleVue = htmlspecialchars($post->getTitle()); ?>
+<?php $titleVue = (isset($post) && $post !=null)? htmlspecialchars($post->getTitle()) : ''; ?>
 <?php $pageClass = "onePostVIew"?>
 <!-- Page Content -->
 <?php ob_start(); ?>
@@ -12,7 +12,7 @@
             <div class="d-flex justify-content-between">
                 <p class="lead">
                   by
-                  <a href="#">Jean Forteroche</a>
+                  <a href="<?=$this->basePath?>home#author_description">Jean Forteroche</a>
                 </p>
                 <?php if($this->isAdmin===true): ?>
                     <div>
@@ -52,7 +52,7 @@
                             <?= isset($erreurs) && in_array(\Entity\Comment::CONTENU_INVALIDE, $erreurs)? 'Le contenu est invalide.<br />' : '' ?>
                         </div>
                         <div class="form-group">
-                            <textarea name="comment" class="form-control" rows="3"><?= isset($comment) ? htmlspecialchars($comment['contenu']) : 'Votre commentaire' ?></textarea>
+                            <textarea name="comment" class="form-control" rows="3" placeholder="Votre commentaire"><?= isset($comment) ? htmlspecialchars($comment['contenu']) : '' ?></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Commenter</button>
                     </form>
@@ -65,7 +65,7 @@
                     <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                     <div class="media-body">
                         <h5 class="mt-0"><?= htmlspecialchars($comment->getAuthor()) ?> - le <?= $comment->getComment_date() ?></h5>
-                        <?= htmlspecialchars($comment->getComment()) ?>
+                        <?= nl2br(htmlspecialchars($comment->getComment())) ?>
                     </div>
                     <div>
                         <?php if($this->isAdmin===false): /* Vu pour les lecteurs */ ?>

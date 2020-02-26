@@ -53,7 +53,7 @@
         </ul>
     </nav>
     <div class="justify-content-center">
-        <a href="home" title="retour à l'accueil" class="btn btn-secondary  mt-4 mb-2" role="button">retour à l'accueil</a>
+        <a href="<?=$this->basePath?>home" title="retour à l'accueil" class="btn btn-secondary  mt-4 mb-2" role="button">retour à l'accueil</a>
     </div>
         
 </section>

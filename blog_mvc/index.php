@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+ini_set('display_errors', 1); 
+ini_set('display_startup_errors', 1); 
+error_reporting(E_ALL);
+
 use App\Library\Autoloader;
 use App\Library\RouterPOO;
 use App\Library\Route;
@@ -8,7 +12,6 @@ use App\Library\Route;
 require 'Library\Autoloader.php';
 require 'Library\fonctions.php';
 App\Library\Autoloader::register();
-
 $router = new RouterPOO();
 
 // ------------------ Route(URL, nomDuCOntroller, nomDeLaction)
