@@ -1,5 +1,4 @@
 <?php
-//P4 Brouillon
 
 namespace App\Controller;
 
@@ -7,13 +6,10 @@ use App\Model\Manager\PostsManager;
 use App\Model\Manager\CommentsManager;
 
 
-
 class AdminController extends AbstractController
 {
     public function __construct() {
         parent::__construct();
-        
-//        vd($_SESSION['adminConnected'], $this->isAdmin);
         
         if($this->isAdmin === false){
             $this->redirectIfNotCOnnected();
@@ -64,10 +60,8 @@ class AdminController extends AbstractController
         // Gestion des actions sur les commentaires en Ajax
         $commentsManager = new CommentsManager();
         if($this->isPost()){     
-            // vérifié si on est en mode ajax :
             if(isset($_POST['commentAction']) && isset($_POST['id'])){
                 if($_POST['commentAction'] == 'read'){
-//                    vd('Fonction READ !');
                     $response = new \stdClass();
                     $response->result = $commentsManager->readComment($_POST['id']);
                     echo json_encode($response);
@@ -75,12 +69,10 @@ class AdminController extends AbstractController
                     $response = new \stdClass();
                     $response->result = $commentsManager->checkComment($_POST['id']);
                     echo json_encode($response);
-//                    die;
                 }elseif($_POST['commentAction'] == 'delete'){
                     $response = new \stdClass();
                     $response->result = $commentsManager->deleteComment($_POST['id']);
                     echo json_encode($response);
-//                    die;
                 }
             }
         }
@@ -89,7 +81,7 @@ class AdminController extends AbstractController
         public function deconnexion(){
         session_destroy();
         session_start();// On redémarre une session anonyme pour pouvoir afficher le message de déconnexion
-        $this->addFlash('Deconnexion ', 'danger');
+        $this->addFlash('Vous êtes déconnecté.', 'info');
 
         $referer = $this->basePath . "home";
         header("Location: $referer");
@@ -190,12 +182,10 @@ class AdminController extends AbstractController
         $messageFlash;
         $messageType;
         $referer;
-//        vd($postToDelete, $referer);
         
         if(isset($postId)){
             $postDeleted = $postsManager->deletePost($postId);
             if($postDeleted == 1){
-//            vd($postDeleted);
                 $messageFlash = 'L\'article intitulé : "' . $postToDelete->getTitle() . '" a bien été supprimé';
                 $messageType = 'success';
                 

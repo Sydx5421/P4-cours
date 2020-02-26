@@ -1,5 +1,4 @@
 <?php
-//P4 Brouillon
 
 namespace App\Controller;
 
@@ -16,7 +15,6 @@ class BlogController extends AbstractController
         // Gestion des actions sur les commentaires en Ajax
         $commentsManager = new CommentsManager();
         if($this->isPost()){     
-            // vérifié si on est en mode ajax :
             if(isset($_POST['commentAction']) && isset($_POST['id'])){
                 if($_POST['commentAction'] == 'reported'){
                     $response = new \stdClass();
@@ -98,7 +96,7 @@ class BlogController extends AbstractController
                     $_SESSION['adminConnected'] = true;  
                     $this->isAdmin = true;   
                     $this->addFlash('Bienvenue ', 'success');
-                    // Faire un redirec vers une page Dashboard que j'aurait créer !
+                    
                     $referer = $this->basePath . "dashboard";
                     header("Location: $referer");
                 }else{

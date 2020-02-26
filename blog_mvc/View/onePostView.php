@@ -29,7 +29,7 @@
 
             <!-- Post Content -->
 
-            <div class="text-justify" style="word-break: break-word;">
+            <div class="text-justify nwl_postContent">
                 <?= nl2br($post->getContent()) ?>
             </div>
 
@@ -52,7 +52,7 @@
                             <?= isset($erreurs) && in_array(\Entity\Comment::CONTENU_INVALIDE, $erreurs)? 'Le contenu est invalide.<br />' : '' ?>
                         </div>
                         <div class="form-group">
-                            <textarea name="comment" class="form-control" rows="3" placeholder="Votre commentaire"><?= isset($comment) ? htmlspecialchars($comment['contenu']) : '' ?></textarea>
+                            <textarea name="comment" class="form-control" rows="3" placeholder="Votre commentaire"><?= isset($comment) ? nl2br(htmlspecialchars($comment['contenu'])) : '' ?></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Commenter</button>
                     </form>
@@ -89,8 +89,6 @@
                     </div>
                 </div>
             <?php endforeach; ?>
-          <!-- Comment with nested comments -->
-          <!-- [...] -->
         </div>
     </div>
 </div>
@@ -155,7 +153,7 @@
     
     function adminActionComment(commentId, action){ // actions administrateur
         var xhr = new XMLHttpRequest();
-        let formData = new FormData(); //objet permettant de transmettre des données en POST
+        let formData = new FormData();
         formData.append("commentAction", action); 
         formData.append("id", commentId); 
         xhr.open('POST','<?=$this->basePath?>adminActionComment' );

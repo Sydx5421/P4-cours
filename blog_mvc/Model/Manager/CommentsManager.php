@@ -1,5 +1,5 @@
 <?php
-//P4 Brouillon
+
 namespace App\Model\Manager;
 
 use App\Model\Entity\Comment;
@@ -20,7 +20,7 @@ class CommentsManager extends Manager
         
         if($req !== false){
             while($comment = $req->fetchObject('App\Model\Entity\Comment')){                
-            $comments[] = $comment;
+                $comments[] = $comment;
             }                   
             $req->closeCursor();
 
@@ -114,26 +114,7 @@ class CommentsManager extends Manager
         return $reqExec;
         
     }
-    
-    public function getALlComments(){
-        $db = $this->dbConnect(); 
-        $req = $db->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date FROM comments ORDER BY comment_date DESC');
-        
-        $req->execute();
-        
-        $comments = [];
-        if($req !== false){ 
-            while($comment = $req->fetchObject('App\Model\Entity\Comment')){
-                $comments[] = $comment;
-            }            
-            $req->closeCursor();     
-            return $comments;
-        }else {
-            $error = $db->errorInfo()[2];
-            return $error;
-        }  
-    }
-    
+       
     public function reportComment($commentId){
         $db = $this->dbConnect();
         $req = $db->exec('UPDATE comments SET reported = 1 WHERE id =' . $commentId);

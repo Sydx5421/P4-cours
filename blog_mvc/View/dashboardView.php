@@ -31,7 +31,7 @@
                             <tr class="d-flex">
                                 <td class="col-7 text-left">
                                     <h5 class="mt-0"><?= htmlspecialchars($comment->getAuthor()) ?> - le <?= $comment->getComment_date(); ?></h5>
-                                    <?= htmlspecialchars($comment->getComment()) ?>
+                                    <?= nl2br(htmlspecialchars($comment->getComment())) ?>
                                 </td>
                                 <td class="col-2">
                                     <a href="<?=$this->basePath?>post/<?= $comment->getPostId(); ?>" target="_blank"><?= htmlspecialchars($postsManager->getPost($comment->getPostId())->getTitle()) ?></a>
@@ -48,7 +48,6 @@
                             <th scope="col" class="col-8">Commentaire</th>
                             <th scope="col" class="col-1"><i class="fas fa-flag"></i></th>
                             <th scope="col" class="col-3">
-                                <!--<button type="button" class="btn btn-secondary">Valider</button>-->
                                 <input type="submit" value="Valider" class="btn login_btn">
                             </th>
                         </tr>
@@ -84,7 +83,7 @@
                             <tr class="d-flex">
                                 <td class="col-7 text-left">
                                     <h5 class="mt-0"><?= htmlspecialchars($comment->getAuthor()) ?> - le <?= $comment->getComment_date(); ?></h5>
-                                    <?= htmlspecialchars($comment->getComment()) ?>
+                                    <?= nl2br(htmlspecialchars($comment->getComment())) ?>
                                 </td>
                                 <td class="col-2">
                                     <a href="<?=$this->basePath?>post/<?= $comment->getPostId(); ?>" target="_blank"><?= htmlspecialchars($postsManager->getPost($comment->getPostId())->getTitle()) ?></a>
@@ -96,17 +95,15 @@
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-                    <tfoot>
-                        <tr class="d-flex">
-                            <th scope="col" class="col-8">Commentaire</th>
-                            <th scope="col" class="col-1"><i class="fas fa-flag"></i></th>
-                            <th scope="col" class="col-3">
-                                <!--<button type="button" class="btn btn-secondary">Valider</button>-->
-                                <input type="submit" value="Valider" class="btn login_btn">
-                            </th>
-                        </tr>
-                    </tfoot>
-
+                        <tfoot>
+                            <tr class="d-flex">
+                                <th scope="col" class="col-8">Commentaire</th>
+                                <th scope="col" class="col-1"><i class="fas fa-flag"></i></th>
+                                <th scope="col" class="col-3">
+                                    <input type="submit" value="Valider" class="btn login_btn">
+                                </th>
+                            </tr>
+                        </tfoot>
                     </tbody>
                 </table>
             </form>

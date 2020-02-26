@@ -3,8 +3,6 @@
 
 <!-- Page Content -->
 <?php ob_start(); ?>
-<?php // echo($title); ?>
-<?php // echo($content); ?>
 <div class="container">
     <h3>Editer un nouvel article</h3>
     <form action="" method="post">

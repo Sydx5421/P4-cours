@@ -25,10 +25,3 @@
 <?php $content = ob_get_clean();?>
 <?php require('blogTemplate.php') ?>
 
-<!--Gestion du message flash-->
-<?php if(isset($_SESSION['message_flash'])){
-    if($_SESSION['message_flash']['redirect'] === true){
-        unset($_SESSION['message_flash']);
-    }
-}?>
-<!------------- End flash---->

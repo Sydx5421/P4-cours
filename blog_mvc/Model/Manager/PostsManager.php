@@ -1,5 +1,5 @@
 <?php
-//94 Brouillon
+
 namespace App\Model\Manager;
 
 use App\Model\Entity\Post;
@@ -12,7 +12,7 @@ class PostsManager extends Manager
     public function getPosts($currentPage=1)
     {
         $db = $this->dbConnect(); 
-        
+        // récupération du nombre de posts pour la Pagination
         $reqNbPosts = $db->query('SELECT COUNT(id) as nbPosts FROM posts');
         $resultNbPosts = $reqNbPosts->fetch();
         
@@ -26,24 +26,28 @@ class PostsManager extends Manager
             $currentPage = 1;
         }
                 
-        // Version fetchObject :
+        // Récupération des posts 
         $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date FROM posts p ORDER BY p.creation_date DESC LIMIT ' . (($currentPage-1)*$nbPostsPerPage) .',3');
         
         $posts = array();
-        
-        while($post = $req->fetchObject('App\Model\Entity\Post')){
-            $posts[] = $post;
-        }
+        if($req !== false){
+            while($post = $req->fetchObject('App\Model\Entity\Post')){
+                $posts[] = $post;
+            }
+            $req->closeCursor();
+            $returnVars = array(
+                "posts" => $posts,
+                "nbPages" => $nbPages,            
+                "currentPage" => $currentPage            
+            );
 
-        $req->closeCursor();
-        
-        $returnVars = array(
-            "posts" => $posts,
-            "nbPages" => $nbPages,            
-            "currentPage" => $currentPage            
-        );
-        
-        return $returnVars;               
+            return $returnVars;   
+            
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }            
+                    
     }
 
     public function getPost($postId=1)
@@ -103,11 +107,11 @@ class PostsManager extends Manager
         return $reqExec;             
     }
     
-    public function deletePost ($postId){
+    public function deletePost ($postId)
+    {
         $db = $this->dbConnect(); 
         $req = $db->exec('DELETE FROM posts WHERE id =' . $postId);
         
         return $req;        
-    }
-    
+    }  
 }

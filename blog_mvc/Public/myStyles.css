@@ -71,8 +71,6 @@ form{
 }
 header{
     background-image: url("img/alaska.jpg");
-    /*height: 40vh;*/
-    /*border: 1px solid #000;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,11 +83,6 @@ body{
     position: relative;
     min-height: 100vh;
     background-color: #dbe9ff;
-    /*background-color: #2199cd;*/
-    /*background-image: url("img/alaska.jpg");*/
-    /*background-repeat: no-repeat;*/
-/*    background-attachment: fixed;
-    background-position: center; */
 }
 /*------------ Body ------------*/
 
@@ -117,7 +110,6 @@ footer ul a:hover{
     color: #87afc9;
     text-decoration: none;
 }
-
 
 footer .nwl_copyright{
     display: flex;
@@ -169,6 +161,9 @@ article{
 .onePostVIew form{
     margin: 1rem auto;
 }
+.nwl_postContent{
+    word-break: break-word;
+}
 /*------------------------------*/
 
 /********** Post EDITION ********/
@@ -207,9 +202,7 @@ th     { background:#eee; }
 .dashboard table tbody td{
     width: 100%;
 }
-/*table thead {
-     display: table-header-group;
-}*/
+
 td{
     border: 1px solid #eee;
 }

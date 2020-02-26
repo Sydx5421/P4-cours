@@ -27,7 +27,7 @@ class RouterPOO{
 
                     // On crée un nouveau tableau clé/valeur
                     foreach ($varsValues as $key => $match){
-                        // La première valeur contient entièrement la chaine capturée (voir la doc sur preg_match)
+                        // La première valeur contient entièrement la chaine capturée
                         if ($key !== 0){
                           $listVars[$varsNames[$key - 1]] = $match;
                         }
@@ -39,7 +39,7 @@ class RouterPOO{
             }
         }
         throw new \RuntimeException('Aucune route ne correspond à l\'URL', self::NO_ROUTE);
-     }
+    }
     
     public function getRoutes() {
         return $this->routes;

@@ -8,7 +8,7 @@ abstract class AbstractController
     protected $isAdmin = false;
     
     public function __construct() {
-        
+        // création dynamique du $basePath
         $contextDocumentRoot = $_SERVER["CONTEXT_DOCUMENT_ROOT"];      
         $rootDir = str_replace('\\', '/', realpath(__DIR__.'/../'));
         $relativeRootDir = str_replace($contextDocumentRoot, '', $rootDir);      
@@ -26,7 +26,7 @@ abstract class AbstractController
     protected function addFlash($message, $type = 'info', $redirect = false){
         $_SESSION["message_flash"] = [
            'message' => $message,
-           'type' => 'alert-' . $type, //(permet d'exploité direct l'info comme class bootstrap
+           'type' => 'alert-' . $type, //(permet d'exploité direct l'info comme class bootstrap)
            'redirect' => $redirect
         ];
         

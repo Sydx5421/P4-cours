@@ -1,5 +1,5 @@
 <?php
-//P4 Brouillon
+
 namespace App\Model\Manager;
 
 abstract class Manager
