@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Model\Manager\PostsManager;
 use App\Model\Manager\CommentsManager;
-
+use App\Model\Entity\Post;
 
 class AdminController extends AbstractController
 {
@@ -193,11 +193,15 @@ class AdminController extends AbstractController
 
                 header("Location: $referer");
             }else{
-                $messageFlash = 'L\'article intitulé : "' . $postToDelete->getTitle() . '" n\'a pas pu être supprimé';
-                $messageType = 'danger';
-                
-                $referer = $this->basePath . "posts";
-                header("Location: $referer");
+                if ($postToDelete instanceof Post ){
+                    $messageFlash = 'L\'article intitulÃ© : "' . $postToDelete->getTitle() . '" n\'a pas pu Ãªtre supprimÃ©';
+                    $messageType = 'danger';                    
+                }else{
+                    $messageFlash = "Cet élément n'existe pas";
+                    $messageType = 'danger';
+                }
+                    $referer = $this->basePath . "posts";
+                    header("Location: $referer");
             }
         }
         
