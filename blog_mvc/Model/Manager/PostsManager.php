@@ -112,6 +112,11 @@ class PostsManager extends Manager
         $db = $this->dbConnect(); 
         $req = $db->exec('DELETE FROM posts WHERE id =' . $postId);
         
-        return $req;        
+        if($req !== false){
+            return $req;      
+        }else {
+            $error = $db->errorInfo()[2];
+            return $error;
+        }          
     }  
 }
