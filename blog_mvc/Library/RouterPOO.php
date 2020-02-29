@@ -52,9 +52,9 @@ class RouterPOO{
         $rootDir = str_replace('\\', '/', realpath(__DIR__.'/../'));
         $relativeRootDir = str_replace($contextDocumentRoot, '', $rootDir);   
         
-        // vérifie si une de ces routes match avec l'url
         $urlRequested = str_replace($relativeRootDir, '', $_SERVER['REQUEST_URI']);
         
+        // vérifie si une de ces routes match avec l'url
         $matches = false;
         
         foreach($this->routes as $route){

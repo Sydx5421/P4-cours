@@ -39,7 +39,7 @@
             <div class="card my-4">
                 <h5 class="card-header">Laissez un commentaire:</h5>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="<?=$this->basePath?>post/<?= ($post->getId())?>" method="post">
 
                         <div class="form-group">
                             <?= isset($erreurs) && in_array(\Entity\Comment::AUTEUR_INVALIDE, $erreurs) ? 'L\'auteur est invalide.<br />' : '' ?>
@@ -92,8 +92,6 @@
         </div>
     </div>
 </div>
-<?php $content = ob_get_clean();?>
-<?php require('blogTemplate.php') ?>
 
 <script>
     // On récupère tous les button de la page
@@ -171,3 +169,6 @@
     }
     
 </script>
+
+<?php $content = ob_get_clean();?>
+<?php require('blogTemplate.php') ?>

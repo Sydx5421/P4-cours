@@ -5,7 +5,7 @@
 <?php ob_start(); ?>
 <div class="container">
     <h3>Editer un nouvel article</h3>
-    <form action="" method="post">
+    <form action="<?=$this->basePath?>postEdition" method="post">
         <input id="postId" name="postId" type="hidden" value="<?php echo(isset($postId)? $postId : ''); ?>">
         <div class="form-group">
             <label for="postTitle">Titre de l'article</label>

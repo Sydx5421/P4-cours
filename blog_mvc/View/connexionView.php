@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 
 <div class="card-body text-center">
-<form action="" method="post" class="col-md-8 col-lg-6 text-center">
+<form action="<?=$this->basePath?>connexion" method="post" class="col-md-8 col-lg-6 text-center">
     <div class="input-group form-group">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-user"></i></span>

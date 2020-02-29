@@ -24,8 +24,8 @@
     
     <script 
         src="https://code.jquery.com/jquery-3.4.1.min.js"
-        accesskey=""integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        async=""crossorigin="anonymous">
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
     </script>
     
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>

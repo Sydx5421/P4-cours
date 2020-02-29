@@ -31,7 +31,7 @@
             <h4><?= htmlspecialchars($lastPost->getTitle()) ?></h4>
             <p>Publié le <?= ($lastPost->getCreation_date())?></p>
             <div class="text-justify">
-                <?= extrait($lastPost->getContent(), 0, 250) ?>
+                <?= extrait(strip_tags($lastPost->getContent()), 0, 250) ?>
             </div>
             <a href="post/<?= ($lastPost->getId())?>" title="Lire la suite de l'article" class="btn btn-secondary  mt-4 mb-2" role="button">Lire la suite</a>
             <hr>
